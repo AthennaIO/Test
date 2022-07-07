@@ -1,0 +1,138 @@
+{
+  "name": "@athenna/template",
+  "version": "1.0.0",
+  "description": "Template for new projects.",
+  "license": "MIT",
+  "author": "João Lenon <lenon@athenna.io>",
+  "bugs": "https://github.com/AthennaIO/Template/issues",
+  "repository": "https://github.com/AthennaIO/Template.git",
+  "homepage": "https://github.com/AthennaIO/Template#readme",
+  "keywords": [
+    "esm",
+    "athenna"
+  ],
+  "scripts": {
+    "lint:fix": "eslint \"{src,tests}/**/*.js\" --fix",
+    "test": "npm run --silent lint:fix && node ./tests/index.js",
+    "test:debug": "cross-env DEBUG=api:* && npm run --silent test",
+    "test:coverage": "c8 npm run --silent test",
+    "gen:types": "tsc src/*.js --declaration --allowJs --emitDeclarationOnly --out src/index.js"
+  },
+  "files": [
+    "src/*.js",
+    "src/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ],
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "imports": {
+    "#src/*": "./src/*.js",
+    "#tests/*": "./tests/*.js"
+  },
+  "dependencies": {
+    "@secjs/utils": "1.9.3"
+  },
+  "devDependencies": {
+    "@japa/assert": "1.3.4",
+    "@japa/run-failed-tests": "1.0.7",
+    "@japa/runner": "2.0.7",
+    "@japa/spec-reporter": "1.1.12",
+    "c8": "7.11.2",
+    "commitizen": "4.2.4",
+    "cross-env": "7.0.3",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.14.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-promise": "6.0.0",
+    "husky": "3.0.9",
+    "lint-staged": "12.4.1",
+    "minimist": "1.2.6",
+    "prettier": "2.6.2",
+    "rimraf": "3.0.2",
+    "typescript": "4.6.4"
+  },
+  "c8": {
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "report-dir": "./tests/Coverage",
+    "check-coverage": true
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "lint-staged && exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "semi": false,
+    "printWidth": 80,
+    "overrides": [
+      {
+        "files": "tests/**/*",
+        "options": {
+          "printWidth": 120
+        }
+      }
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "es2021": true,
+      "node": true
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "extends": [
+      "standard",
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "ignorePatterns": [
+      "**/*.d.ts"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "rules": {
+      "camelcase": "off",
+      "dot-notation": "off",
+      "prettier/prettier": "error",
+      "no-useless-constructor": "off"
+    }
+  }
+}
