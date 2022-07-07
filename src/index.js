@@ -71,13 +71,15 @@ export class Test {
    */
   convert() {
     test.group(this.constructor.name, suite => {
-      if (this.beforeAll) suite.setup(this.beforeAll)
-      if (this.beforeEach) suite.each.setup(this.beforeEach)
-      if (this.afterAll) suite.teardown(this.afterAll)
-      if (this.afterEach) suite.each.teardown(this.afterEach)
+      if (this.beforeAll) suite.setup(this.beforeAll.bind(this))
+      if (this.beforeEach) suite.each.setup(this.beforeEach.bind(this))
+      if (this.afterAll) suite.teardown(this.afterAll.bind(this))
+      if (this.afterEach) suite.each.teardown(this.afterEach.bind(this))
 
       this.testNames.forEach(testName => {
-        const japaTest = test(testName, this[testName]).timeout(this.timeout)
+        const japaTest = test(testName, this[testName].bind(this)).timeout(
+          this.timeout,
+        )
 
         if (this.runOnly[0] === '*') {
           return
