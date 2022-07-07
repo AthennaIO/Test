@@ -1,5 +1,5 @@
 /**
- * @athenna/template
+ * @athenna/test
  *
  * (c) João Lenon <lenon@athenna.io>
  *
@@ -7,11 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import { pathToFileURL } from 'url'
 import { assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { runFailedTests } from '@japa/run-failed-tests'
 import { processCliArgs, configure, run } from '@japa/runner'
+
+import { TestSuite } from '#src/index'
+import { File, Folder, Path } from '@secjs/utils'
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +30,33 @@ import { processCliArgs, configure, run } from '@japa/runner'
 */
 
 configure({
-  ...processCliArgs(process.argv.slice(2)),
+  ...processCliArgs(TestSuite.getArgs()),
   ...{
-    files: ['tests/**/*Test.js'],
+    suites: [
+      {
+        name: 'E2E',
+        files: ['tests/E2E/**/*Test.js'],
+        configure: suite => {
+          return TestSuite.httpEnd2EndSuite(suite)
+        },
+      },
+      {
+        name: 'Unit',
+        files: ['tests/Unit/**/*Test.js'],
+        configure: suite => TestSuite.unitSuite(suite),
+      },
+    ],
     plugins: [assert(), runFailedTests()],
     reporters: [specReporter()],
-    importer: filePath => import(pathToFileURL(filePath).href),
+    importer: async filePath => {
+      await new Folder(Path.stubs('app')).copy(Path.app())
+      await new Folder(Path.stubs('config')).copy(Path.config())
+      await new Folder(Path.stubs('routes')).copy(Path.routes())
+      await new Folder(Path.stubs('providers')).copy(Path.providers())
+      await new File(Path.stubs('.env.test')).copy(Path.pwd('.env.test'))
+
+      return TestSuite.importer(filePath)
+    },
   },
 })
 

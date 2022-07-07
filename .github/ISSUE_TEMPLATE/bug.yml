@@ -36,7 +36,7 @@ body:
       label: Version
       description: |
         The version you are using.
-        Is it the [latest](https://github.com/AthennaIO/Template/releases)? Test and see if the bug has already been fixed.
+        Is it the [latest](https://github.com/AthennaIO/Test/releases)? Test and see if the bug has already been fixed.
       placeholder: ex. 1.0.0
     validations:
       required: true

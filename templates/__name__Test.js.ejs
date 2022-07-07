@@ -1,0 +1,12 @@
+import { Test } from '@athenna/test'
+
+export class <%= namePascal %>Test extends Test {
+    /**
+     * Run your test.
+     *
+     * @param {import('@athenna/test').HttpTestContext} ctx
+     */
+    async shouldBeAbleToRunTests({ assert }) {
+        assert.equal(2 + 2, 4)
+    }
+}

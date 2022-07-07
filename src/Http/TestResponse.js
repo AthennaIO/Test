@@ -1,96 +1,32 @@
-export * from '@japa/runner'
-import { Assert } from '@japa/assert'
-import { InjectOptions } from 'fastify'
-
-declare module '@japa/runner' {
-  interface TestContext {
-    request: TestRequest
-  }
-}
-
-export interface UnitTestContext {
-  assert: Assert
-}
-
-export interface HttpTestContext {
-  assert: Assert
-  request: TestRequest
-}
-
-export class Test {
-  /**
-   * Before all event. This method is executed
-   * before all tests.
-   *
-   * @return {void | Promise<void>}
-   */
-  beforeAll(): void | Promise<void>
-
-  /**
-   * Before each event. This method is executed
-   * before each test.
-   *
-   * @return {void | Promise<void>}
-   */
-  beforeEach(): void | Promise<void>
-
-  /**
-   * After all event. This method is executed
-   * after all tests.
-   *
-   * @return {void | Promise<void>}
-   */
-  afterAll(): void | Promise<void>
-
-  /**
-   * After each event. This method is executed
-   * after each test.
-   *
-   * @return {void | Promise<void>}
-   */
-  afterEach(): void | Promise<void>
-
-  /**
-   * Set the test timeout for all tests inside the group.
-   *
-   * @example
-   *  Default is 2000
-   *
-   * @return {number}
-   */
-  get timeout(): number
-
-  /**
-   * Set the test names that can run.
-   *
-   * @example
-   *  Default is ['*']
-   *
-   * @return {string[]}
-   */
-  get runOnly(): string[]
-
-  /**
-   * Get all test methods that doesn't start with _, ignoring constructor
-   * and test events.
-   *
-   * @example
-   *  async myMethodImpl() {} // BAD!!! This method will be considered a test.
-   *  async _myMethodImpl() {} // GOOD!!! This method will not be considered a test.
-   *
-   * @return {string[]}
-   */
-  get testNames(): string[]
-
-  /**
-   * Convert the test to Japa functions.
-   *
-   * @return {void}
-   */
-  convert(): void
-}
-
 export class TestResponse {
+  /**
+   * @type {import('@japa/assert').Assert}
+   */
+  #assert
+
+  /**
+   * @type {import('light-my-request').Response}
+   */
+  #response
+
+  /**
+   * @param {import('@japa/assert').Assert} assert
+   * @param {import('light-my-request').Response} response
+   */
+  constructor(assert, response) {
+    this.#assert = assert
+    this.#response = response
+  }
+
+  /**
+   * Get the original response object.
+   *
+   * @return {import('light-my-request').Response}
+   */
+  getResponse() {
+    return this.#response
+  }
+
   /**
    * Assert the status code of the response.
    *
@@ -98,7 +34,9 @@ export class TestResponse {
    * @example
    *   response.assertStatusCode(200)
    */
-  assertStatusCode(number: number): void
+  assertStatusCode(number) {
+    this.#assert.deepEqual(this.#response.statusCode, number)
+  }
 
   /**
    * Assert the status code is not the same of the response.
@@ -107,7 +45,9 @@ export class TestResponse {
    * @example
    *   response.assertIsNotStatusCode(200)
    */
-  assertIsNotStatusCode(number: number): void
+  assertIsNotStatusCode(number) {
+    this.#assert.notDeepEqual(this.#response.statusCode, number)
+  }
 
   /**
    * Assert body (array or object) to contain a subset of the expected value.
@@ -122,7 +62,11 @@ export class TestResponse {
    *
    *   response.assertBodyContains([{ id: 1 }, { id: 2 }]) // passes
    */
-  assertBodyContains(values: any | any[]): void
+  assertBodyContains(values) {
+    const body = this.#response.json()
+
+    this.#assert.containsSubset(body, values)
+  }
 
   /**
    * Assert body (array or object) to not contain a subset of the expected value.
@@ -137,7 +81,11 @@ export class TestResponse {
    *
    *   response.assertBodyNotContains([{ id: 3 }]) // passes
    */
-  assertBodyNotContains(values: any | any[]): void
+  assertBodyNotContains(values) {
+    const body = this.#response.json()
+
+    this.#assert.notContainsSubset(body, values)
+  }
 
   /**
    * Assert body to contain a key.
@@ -148,7 +96,11 @@ export class TestResponse {
    *
    *   response.assertBodyContainsKey('id') // passes
    */
-  assertBodyContainsKey(key: string): void
+  assertBodyContainsKey(key) {
+    const body = this.#response.json()
+
+    this.#assert.property(body, key)
+  }
 
   /**
    * Assert body to not contain a key.
@@ -163,7 +115,11 @@ export class TestResponse {
    *
    *   response.assertBodyNotContainsKey('createdAt') // passes
    */
-  assertBodyNotContainsKey(key: string): void
+  assertBodyNotContainsKey(key) {
+    const body = this.#response.json()
+
+    this.#assert.notProperty(body, key)
+  }
 
   /**
    * Assert body to contain all keys.
@@ -174,7 +130,11 @@ export class TestResponse {
    *
    *   response.assertBodyContainsAllKeys(['id', 'post']) // passes
    */
-  assertBodyContainsAllKeys(keys: string[]): void
+  assertBodyContainsAllKeys(keys) {
+    const body = this.#response.json()
+
+    this.#assert.properties(body, keys)
+  }
 
   /**
    * Assert body to not contain all keys.
@@ -189,7 +149,11 @@ export class TestResponse {
    *
    *   response.assertBodyNotContainsAllKeys(['createdAt']) // passes
    */
-  assertBodyNotContainsAllKey(keys: string[]): void
+  assertBodyNotContainsAllKey(keys) {
+    const body = this.#response.json()
+
+    this.#assert.notAllProperties(body, keys)
+  }
 
   /**
    * Assert body (array or object) to be deep equal to the expected value.
@@ -204,7 +168,11 @@ export class TestResponse {
    *
    *   response.assertBodyDeepEqual([{ id: 1, name: 'post 1' }, { id: 2, name: 'post 2'}]) // passes
    */
-  assertBodyDeepEqual(values: any | any[]): void
+  assertBodyDeepEqual(values) {
+    const body = this.#response.json()
+
+    this.#assert.deepEqual(body, values)
+  }
 
   /**
    * Assert body (array or object) to be not deep equal to the expected value.
@@ -219,7 +187,11 @@ export class TestResponse {
    *
    *   response.assertBodyNotDeepEqual([{ id: 1, name: 'post 1' }, { id: 2, name: 'post 2'}]) // fails
    */
-  assertBodyNotDeepEqual(values: any | any[]): void
+  assertBodyNotDeepEqual(values) {
+    const body = this.#response.json()
+
+    this.#assert.notDeepEqual(body, values)
+  }
 
   /**
    * Assert body to be an array.
@@ -233,7 +205,11 @@ export class TestResponse {
    *
    *   response.assertBodyIsArray() // passes
    */
-  assertBodyIsArray(): void
+  assertBodyIsArray() {
+    const body = this.#response.json()
+
+    this.#assert.isArray(body)
+  }
 
   /**
    * Assert body to not be an array.
@@ -247,7 +223,11 @@ export class TestResponse {
    *
    *   response.assertBodyIsNotArray() // fails
    */
-  assertBodyIsNotArray(): void
+  assertBodyIsNotArray() {
+    const body = this.#response.json()
+
+    this.#assert.isNotArray(body)
+  }
 
   /**
    * Assert body to be an object.
@@ -261,7 +241,11 @@ export class TestResponse {
    *
    *   response.assertBodyIsObject() // fails
    */
-  assertBodyIsObject(): void
+  assertBodyIsObject() {
+    const body = this.#response.json()
+
+    this.#assert.isObject(body)
+  }
 
   /**
    * Assert body to not be an object.
@@ -275,7 +259,11 @@ export class TestResponse {
    *
    *   response.assertBodyIsObject() // passes
    */
-  assertBodyIsNotObject(): void
+  assertBodyIsNotObject() {
+    const body = this.#response.json()
+
+    this.#assert.isObject(body)
+  }
 
   /**
    * Assert header (array or object) to contain a subset of the expected value.
@@ -290,7 +278,11 @@ export class TestResponse {
    *
    *   response.assertHeaderContains([{ id: 1 }, { id: 2 }]) // passes
    */
-  assertHeaderContains(values: any | any[]): void
+  assertHeaderContains(values) {
+    const headers = this.#response.headers
+
+    this.#assert.containsSubset(headers, values)
+  }
 
   /**
    * Assert header (array or object) to not contain a subset of the expected value.
@@ -305,7 +297,11 @@ export class TestResponse {
    *
    *   response.assertHeaderContains([{ id: 1 }, { id: 2 }]) // passes
    */
-  assertHeaderNotContains(values: any | any[]): void
+  assertHeaderNotContains(values) {
+    const headers = this.#response.headers
+
+    this.#assert.notContainsSubset(headers, values)
+  }
 
   /**
    * Assert header (array or object) to be deep equal to the expected value.
@@ -320,7 +316,11 @@ export class TestResponse {
    *
    *   response.assertHeaderDeepEqual([{ id: 1, name: 'post 1' }, { id: 2, name: 'post 2'}]) // passes
    */
-  assertHeaderDeepEqual(values: any | any[]): void
+  assertHeaderDeepEqual(values) {
+    const header = this.#response.headers
+
+    this.#assert.deepEqual(header, values)
+  }
 
   /**
    * Assert header (array or object) to be not deep equal to the expected value.
@@ -335,7 +335,11 @@ export class TestResponse {
    *
    *   response.assertHeaderNotDeepEqual([{ id: 1, name: 'post 1' }, { id: 2, name: 'post 2'}]) // fails
    */
-  assertHeaderNotDeepEqual(values: any | any[]): void
+  assertHeaderNotDeepEqual(values) {
+    const headers = this.#response.headers
+
+    this.#assert.notDeepEqual(headers, values)
+  }
 
   /**
    * Assert header to contain a key.
@@ -346,7 +350,11 @@ export class TestResponse {
    *
    *   response.assertHeaderContainsKey('id') // passes
    */
-  assertHeaderContainsKey(key: string): void
+  assertHeaderContainsKey(key) {
+    const headers = this.#response.headers
+
+    this.#assert.property(headers, key)
+  }
 
   /**
    * Assert header to not contain a key.
@@ -361,124 +369,9 @@ export class TestResponse {
    *
    *   response.assertHeaderNotContainsKey('createdAt') // passes
    */
-  assertHeaderNotContainsKey(key: string): void
-}
+  assertHeaderNotContainsKey(key) {
+    const headers = this.#response.headers
 
-export class TestRequest {
-  /**
-   * Makes a request with GET http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  get(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with HEAD http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  head(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with OPTIONS http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  options(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with POST http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  post(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with PUT http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  put(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with PATCH http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  patch(url: string, options?: InjectOptions): Promise<TestResponse>
-
-  /**
-   * Makes a request with DELETE http method.
-   *
-   * @param {string} url
-   * @param {import('fastify').InjectOptions} options
-   * @return {Promise<TestResponse>}
-   */
-  delete(url: string, options?: InjectOptions): Promise<TestResponse>
-}
-
-export class TestSuite {
-  /**
-   * Get the cli arguments when running the tests.
-   *
-   * @return {string[]}
-   */
-  static getArgs(): string[]
-
-  /**
-   * Resolve the import of the test files.
-   *
-   * @param {string} filePath
-   * @return {Promise<void>}
-   */
-  static importer(filePath: string): Promise<void>
-
-  /**
-   * Creates the unit test suite.
-   *
-   * @param {any} suite
-   */
-  static unitSuite(suite: any): void
-
-  /**
-   * Creates the cli test suite.
-   *
-   * @param {any} suite
-   */
-  static cliEnd2EndSuite(suite: any): void
-
-  /**
-   * Creates the http test suite.
-   *
-   * @param {any} suite
-   */
-  static httpEnd2EndSuite(suite: any): void
-}
-
-export class TestCommandsLoader {
-  /**
-   * Return all commands from test package.
-   *
-   * @return {any[]}
-   */
-  static loadCommands(): any[]
-
-  /**
-   * Return all custom templates from test package.
-   *
-   * @return {any[]}
-   */
-  static loadTemplates(): any[]
+    this.#assert.notProperty(headers, key)
+  }
 }
