@@ -77,6 +77,10 @@ export class Test {
       if (this.afterEach) suite.each.teardown(this.afterEach.bind(this))
 
       this.testNames.forEach(testName => {
+        if (!this.runOnly || !this.runOnly.length) {
+          return
+        }
+
         const japaTest = test(testName, this[testName].bind(this)).timeout(
           this.timeout,
         )

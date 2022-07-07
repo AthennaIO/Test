@@ -63,7 +63,7 @@ export class MakeTest extends Command {
     }
 
     if (!options.class) {
-      resource = 'TestFn'
+      resource = 'FnTest'
     }
 
     this.simpleLog(

@@ -8,12 +8,12 @@
  */
 
 import { assert } from '@japa/assert'
+import { File, Folder, Path } from '@secjs/utils'
 import { specReporter } from '@japa/spec-reporter'
 import { runFailedTests } from '@japa/run-failed-tests'
 import { processCliArgs, configure, run } from '@japa/runner'
 
 import { TestSuite } from '#src/index'
-import { File, Folder, Path } from '@secjs/utils'
 
 /*
 |--------------------------------------------------------------------------
