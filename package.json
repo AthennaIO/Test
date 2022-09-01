@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Template for new projects.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -39,7 +39,7 @@
     "#tests/*": "./tests/*.js"
   },
   "dependencies": {
-    "@athenna/core": "1.7.4",
+    "@athenna/core": "1.7.5",
     "@secjs/utils": "1.9.7"
   },
   "devDependencies": {
