@@ -41,12 +41,12 @@ export class Test {
   }
 
   /**
-   * Get all test methods that doesn't start with _, ignoring constructor
+   * Get all test methods that doesn't start with "it", "test", and "should", ignoring constructor
    * and test events.
    *
    * @example
-   *  async myMethodImpl() {} // BAD!!! This method will be considered a test.
-   *  async _myMethodImpl() {} // GOOD!!! This method will not be considered a test.
+   *  async testMethodImpl() {} // BAD!!! This method will be considered a test.
+   *  async myMethodImpl() {} // GOOD!!! This method will not be considered a test.
    *
    * @return {string[]}
    */
@@ -60,7 +60,11 @@ export class Test {
     ]
 
     return Object.getOwnPropertyNames(Object.getPrototypeOf(this)).filter(
-      name => !removeMethods.includes(name) && !name.startsWith('_'),
+      name =>
+        !removeMethods.includes(name) &&
+        (name.startsWith('it') ||
+          name.startsWith('test') ||
+          name.startsWith('should')),
     )
   }
 

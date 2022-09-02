@@ -50,9 +50,9 @@ export class HttpTestTest extends Test {
    * @param {import('#src/index').HttpTestContext} ctx
    */
   async shouldBeAbleToMakeFnTestFiles({ assert }) {
-    await Artisan.call('make:test FeatureFnTest --no-class')
+    await Artisan.call('make:test FeatureTestFn --no-class')
 
-    const path = Path.tests('E2E/FeatureFnTest.js')
+    const path = Path.tests('E2E/FeatureTestFn.js')
 
     assert.isTrue(await File.exists(path))
 
