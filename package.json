@@ -1,7 +1,7 @@
 {
   "name": "@athenna/test",
-  "version": "1.0.6",
-  "description": "Template for new projects.",
+  "version": "1.0.7",
+  "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
   "bugs": "https://github.com/AthennaIO/Test/issues",
@@ -39,7 +39,7 @@
     "#tests/*": "./tests/*.js"
   },
   "dependencies": {
-    "@athenna/core": "1.7.5",
+    "@athenna/core": "1.7.6",
     "@secjs/utils": "1.9.7"
   },
   "devDependencies": {
