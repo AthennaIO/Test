@@ -39,7 +39,7 @@
     "#tests/*": "./tests/*.js"
   },
   "dependencies": {
-    "@athenna/core": "1.7.7",
+    "@athenna/core": "1.7.8",
     "@secjs/utils": "1.9.7"
   },
   "devDependencies": {
