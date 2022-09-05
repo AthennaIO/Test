@@ -8,7 +8,7 @@
  */
 
 import { Command } from '@athenna/artisan'
-import { Path, Config } from '@secjs/utils'
+import { Path, Config, Module } from '@secjs/utils'
 
 export class Test extends Command {
   /**
@@ -76,6 +76,6 @@ export class Test extends Command {
       process.env.DEBUG = 'api:*'
     }
 
-    await import(Path.tests('main.js'))
+    await Module.import(Path.tests('main.js'))
   }
 }

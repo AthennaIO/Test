@@ -8,7 +8,7 @@
  */
 
 import { Path } from '@secjs/utils'
-import { Artisan, Command, TemplateHelper } from '@athenna/artisan'
+import { Command } from '@athenna/artisan'
 
 export class MakeTest extends Command {
   /**
@@ -56,29 +56,22 @@ export class MakeTest extends Command {
    */
   async handle(name, options) {
     let resource = 'Test'
-    let subPath = Path.tests('E2E')
-
-    if (options.unit) {
-      subPath = Path.tests('Unit')
-    }
+    let template = 'test'
+    let path = Path.tests(`E2E/${name}.js`)
 
     if (!options.class) {
       resource = 'TestFn'
+      template = 'testFn'
     }
 
-    this.simpleLog(
-      `[ MAKING ${resource.toUpperCase()} ]\n`,
-      'rmNewLineStart',
-      'bold',
-      'green',
-    )
+    if (options.unit) {
+      path = Path.tests(`Unit/${name}.js`)
+    }
 
-    const file = await TemplateHelper.getResourceFile(name, resource, subPath)
+    this.title(`MAKING ${resource}\n`, 'bold', 'green')
+
+    const file = await this.makeFile(path, template, options.lint)
 
     this.success(`${resource} ({yellow} "${file.name}") successfully created.`)
-
-    if (options.lint) {
-      await Artisan.call(`eslint:fix ${file.path} --resource ${resource}`)
-    }
   }
 }
