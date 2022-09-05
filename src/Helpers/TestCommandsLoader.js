@@ -17,8 +17,9 @@ export class TestCommandsLoader {
    * @return {any[]}
    */
   static loadTemplates() {
-    return new Folder(
-      join(Module.createDirname(import.meta.url), '..', '..', 'templates'),
-    ).loadSync().files
+    const dirname = Module.createDirname(import.meta.url)
+    const templatesPath = join(dirname, '..', '..', 'templates')
+
+    return new Folder(templatesPath).loadSync().getFilesByPattern('**/*.ejs')
   }
 }

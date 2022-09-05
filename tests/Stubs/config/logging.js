@@ -29,7 +29,7 @@ export default {
       formatterConfig: {},
     },
     console: {
-      driver: 'console',
+      driver: 'null',
       formatter: 'cli',
       streamType: 'stdout',
       formatterConfig: {},
