@@ -1,7 +1,7 @@
 import { join } from 'node:path'
 import { Folder, Module } from '@secjs/utils'
 
-export class TestCommandsLoader {
+export class TestLoader {
   /**
    * Return all commands from test package.
    *

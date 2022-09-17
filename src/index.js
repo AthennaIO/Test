@@ -13,7 +13,7 @@ export { test }
 export * from './Http/TestRequest.js'
 export * from './Http/TestResponse.js'
 export * from './Suite/TestSuite.js'
-export * from './Helpers/TestCommandsLoader.js'
+export * from './Helpers/TestLoader.js'
 
 export class Test {
   /**

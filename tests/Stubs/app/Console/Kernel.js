@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { HttpCommandsLoader } from '@athenna/http'
+import { HttpLoader } from '@athenna/http'
+import { CoreLoader } from '@athenna/core'
 import { ArtisanLoader, ConsoleKernel } from '@athenna/artisan'
 
-import { TestCommandsLoader } from '#src/index'
+import { TestLoader } from '#src/index'
 
 export class Kernel extends ConsoleKernel {
   /**
@@ -19,15 +20,20 @@ export class Kernel extends ConsoleKernel {
    * @return {any[]}
    */
   get commands() {
-    return [...ArtisanLoader.loadCommands(), ...HttpCommandsLoader.loadCommands(), ...TestCommandsLoader.loadCommands()]
+    return [
+      ...ArtisanLoader.loadCommands(),
+      ...HttpLoader.loadCommands(),
+      ...TestLoader.loadCommands(),
+      ...CoreLoader.loadCommands(),
+    ]
   }
 
   /**
    * Register custom templates files.
    *
-   * @return {import('@secjs/utils').File[] | Promise<any[]>}
+   * @return {any[]}
    */
   get templates() {
-    return [...HttpCommandsLoader.loadTemplates(), ...TestCommandsLoader.loadTemplates()]
+    return [...HttpLoader.loadTemplates(), ...TestLoader.loadTemplates(), ...ArtisanLoader.loadTemplates()]
   }
 }

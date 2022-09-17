@@ -467,7 +467,7 @@ export class TestSuite {
   static httpEnd2EndSuite(suite: any): void
 }
 
-export class TestCommandsLoader {
+export class TestLoader {
   /**
    * Return all commands from test package.
    *
