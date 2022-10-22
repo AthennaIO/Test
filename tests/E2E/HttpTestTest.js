@@ -1,6 +1,6 @@
 import { Test } from '#src/index'
 import { Artisan } from '@athenna/artisan'
-import { File, Path, Folder } from '@secjs/utils'
+import { File, Folder, Path } from '@athenna/common'
 
 export class HttpTestTest extends Test {
   async afterAll() {

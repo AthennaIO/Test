@@ -1,3 +1,12 @@
+/**
+ * @athenna/test
+ *
+ * (c) João Lenon <lenon@athenna.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 export * from '@japa/runner'
 import { Assert } from '@japa/assert'
 import { InjectOptions } from 'fastify'
@@ -18,38 +27,6 @@ export interface HttpTestContext {
 }
 
 export class Test {
-  /**
-   * Before all event. This method is executed
-   * before all tests.
-   *
-   * @return {void | Promise<void>}
-   */
-  beforeAll(): void | Promise<void>
-
-  /**
-   * Before each event. This method is executed
-   * before each test.
-   *
-   * @return {void | Promise<void>}
-   */
-  beforeEach(): void | Promise<void>
-
-  /**
-   * After all event. This method is executed
-   * after all tests.
-   *
-   * @return {void | Promise<void>}
-   */
-  afterAll(): void | Promise<void>
-
-  /**
-   * After each event. This method is executed
-   * after each test.
-   *
-   * @return {void | Promise<void>}
-   */
-  afterEach(): void | Promise<void>
-
   /**
    * Set the test timeout for all tests inside the group.
    *
@@ -81,6 +58,38 @@ export class Test {
    * @return {string[]}
    */
   get testNames(): string[]
+
+  /**
+   * Before all event. This method is executed
+   * before all tests.
+   *
+   * @return {void | Promise<void>}
+   */
+  beforeAll(): void | Promise<void>
+
+  /**
+   * Before each event. This method is executed
+   * before each test.
+   *
+   * @return {void | Promise<void>}
+   */
+  beforeEach(): void | Promise<void>
+
+  /**
+   * After all event. This method is executed
+   * after all tests.
+   *
+   * @return {void | Promise<void>}
+   */
+  afterAll(): void | Promise<void>
+
+  /**
+   * After each event. This method is executed
+   * after each test.
+   *
+   * @return {void | Promise<void>}
+   */
+  afterEach(): void | Promise<void>
 
   /**
    * Convert the test to Japa functions.

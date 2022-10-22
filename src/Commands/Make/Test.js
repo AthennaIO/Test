@@ -1,5 +1,5 @@
 /**
- * @athenna/artisan
+ * @athenna/test
  *
  * (c) João Lenon <lenon@athenna.io>
  *
@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Path } from '@secjs/utils'
+import { Path } from '@athenna/common'
 import { Command } from '@athenna/artisan'
 
 export class MakeTest extends Command {

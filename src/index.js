@@ -32,12 +32,12 @@ export class Test {
    * Set the test names that can run.
    *
    * @example
-   *  Default is ['*']
+   *  Default is null
    *
    * @return {string[]}
    */
   get runOnly() {
-    return ['*']
+    return null
   }
 
   /**
@@ -81,15 +81,17 @@ export class Test {
       if (this.afterEach) suite.each.teardown(this.afterEach.bind(this))
 
       this.testNames.forEach(testName => {
-        if (!this.runOnly || !this.runOnly.length) {
-          return
-        }
-
         const japaTest = test(testName, this[testName].bind(this)).timeout(
           this.timeout,
         )
 
+        if (!this.runOnly || !this.runOnly.length) {
+          return
+        }
+
         if (this.runOnly[0] === '*') {
+          japaTest.pin()
+
           return
         }
 
