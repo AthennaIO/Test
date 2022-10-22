@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { Command } from '@athenna/artisan'
 import { Config } from '@athenna/config'
+import { Command } from '@athenna/artisan'
 import { Module, Path } from '@athenna/common'
 
 export class Test extends Command {

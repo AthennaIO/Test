@@ -142,6 +142,7 @@ export default {
 
   providers: [
     import('@athenna/artisan/providers/ArtisanProvider'),
+    import('@athenna/artisan/providers/TemplateProvider'),
     import('@athenna/http/providers/HttpServerProvider'),
     import('@athenna/http/providers/HttpRouteProvider'),
     import('@athenna/logger/providers/LoggerProvider'),
