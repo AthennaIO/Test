@@ -1,5 +1,5 @@
 /**
- * @athenna/artisan
+ * @athenna/test
  *
  * (c) João Lenon <lenon@athenna.io>
  *
@@ -8,7 +8,8 @@
  */
 
 import { Command } from '@athenna/artisan'
-import { Path, Config, Module } from '@secjs/utils'
+import { Config } from '@athenna/config'
+import { Module, Path } from '@athenna/common'
 
 export class Test extends Command {
   /**
