@@ -29,6 +29,6 @@ export class TestLoader {
     const dirname = Module.createDirname(import.meta.url)
     const templatesPath = join(dirname, '..', '..', 'templates')
 
-    return new Folder(templatesPath).loadSync().getFilesByPattern('**/*.ejs')
+    return new Folder(templatesPath).loadSync().getFilesByPattern('**/*.edge')
   }
 }

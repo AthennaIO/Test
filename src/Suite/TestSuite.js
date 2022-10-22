@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { Module } from '@athenna/common'
 import { Ignite } from '@athenna/core'
+import { Module } from '@athenna/common'
 import { TestContext } from '@japa/runner'
 
 import { TestRequest } from '#src/index'
