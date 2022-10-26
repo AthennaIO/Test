@@ -1,3 +1,5 @@
+import { Path } from '@athenna/common'
+
 export default {
   /*
   |--------------------------------------------------------------------------
@@ -10,7 +12,7 @@ export default {
   |
   */
 
-  default: 'application',
+  default: 'stack',
 
   /*
   |--------------------------------------------------------------------------
@@ -19,33 +21,84 @@ export default {
   |
   | Here you may configure the log channels for your application.
   |
+  | Available Drivers:
+  |   "stack", "console", "discord", "file", "null", "slack", "telegram".
+  | Available Formatters:
+  |   "cli", "simple", "json", "request", "message".
+  |
   */
 
   channels: {
+    stack: {
+      driver: 'stack',
+      channels: ['application'],
+    },
+
     application: {
       driver: 'console',
+      level: 'trace',
+
       formatter: 'simple',
-      streamType: 'stdout',
-      formatterConfig: {},
     },
     console: {
-      driver: 'null',
+      driver: 'console',
+      level: 'trace',
+
       formatter: 'cli',
-      streamType: 'stdout',
-      formatterConfig: {},
     },
     exception: {
       driver: 'console',
+      level: 'trace',
+      streamType: 'stderr',
+
       formatter: 'none',
-      streamType: 'stdout',
     },
     request: {
       driver: 'console',
+      level: 'trace',
+
       formatter: 'request',
-      streamType: 'stdout',
       formatterConfig: {
         asJson: false,
       },
+    },
+    discard: {
+      driver: 'null',
+    },
+    file: {
+      driver: 'file',
+      level: 'trace',
+      filePath: Path.logs('athenna.log'),
+
+      formatter: 'simple',
+      formatterConfig: {},
+    },
+    slack: {
+      driver: 'slack',
+      level: 'fatal',
+      url: 'your-slack-webhook-url',
+
+      formatter: 'message',
+      formatterConfig: {},
+    },
+    discord: {
+      driver: 'discord',
+      level: 'fatal',
+      username: 'Athenna',
+      url: 'your-discord-webhook-url',
+
+      formatter: 'message',
+      formatterConfig: {},
+    },
+    telegram: {
+      driver: 'telegram',
+      level: 'fatal',
+      chatId: 0,
+      parseMode: 'HTML',
+      token: 'your-telegram-bot-token',
+
+      formatter: 'message',
+      formatterConfig: {},
     },
   },
 }

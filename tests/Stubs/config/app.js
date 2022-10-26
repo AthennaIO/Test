@@ -1,5 +1,5 @@
 import { Log } from '@athenna/logger'
-import { Server } from '@athenna/http'
+import { ProviderHelper } from '@athenna/core'
 
 export default {
   /*
@@ -123,10 +123,19 @@ export default {
   |
   */
 
-  gracefulShutdown: async () => {
-    Log.warn('Athenna application gracefully shutting down.')
+  gracefulShutdown: {
+    SIGINT: async () => {
+      await ProviderHelper.shutdownAll()
 
-    await Server.close()
+      process.exit()
+    },
+    SIGTERM: async signal => {
+      Log.warn('Athenna application gracefully shutting down.')
+
+      await ProviderHelper.shutdownAll()
+
+      process.kill(process.pid, signal)
+    },
   },
 
   /*
@@ -142,6 +151,7 @@ export default {
 
   providers: [
     import('@athenna/artisan/providers/ArtisanProvider'),
+    import('@athenna/artisan/providers/TemplateProvider'),
     import('@athenna/artisan/providers/TemplateProvider'),
     import('@athenna/http/providers/HttpServerProvider'),
     import('@athenna/http/providers/HttpRouteProvider'),
