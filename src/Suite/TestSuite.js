@@ -85,7 +85,7 @@ export class TestSuite {
 
       TestContext.macro('request', new TestRequest())
 
-      return async () => await ProviderHelper.shutdownAll()
+      return async () => await ProviderHelper.shutdownAll(false)
     })
   }
 }
