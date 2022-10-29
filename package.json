@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@athenna/core": "2.0.6",
-    "@japa/assert": "1.3.",
+    "@japa/assert": "1.3.4",
     "@japa/runner": "2.0.7"
   },
   "devDependencies": {
