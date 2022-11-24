@@ -101,6 +101,13 @@ export class Test {
 
 export class TestResponse {
   /**
+   * Get the original response object.
+   *
+   * @return {import('light-my-request').Response}
+   */
+  getResponse(): import('light-my-request').Response
+
+  /**
    * Assert the status code of the response.
    *
    * @param {number} number
