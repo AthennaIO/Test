@@ -8,7 +8,6 @@
  */
 
 import { Assert } from '@japa/assert'
-import { Server } from '@athenna/http'
 import { TestResponse } from '#src/Http/TestResponse'
 
 export class TestRequest {
@@ -32,6 +31,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   get(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'GET', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -43,6 +44,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   head(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'HEAD', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -54,6 +57,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   options(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'OPTIONS', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -65,6 +70,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   post(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'POST', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -76,6 +83,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   put(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'PUT', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -87,6 +96,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   patch(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'PATCH', ...options }).then(res =>
       this.#createResponse(res),
     )
@@ -98,6 +109,8 @@ export class TestRequest {
    * @return {Promise<TestResponse>}
    */
   delete(url, options = {}) {
+    const Server = ioc.safeUse('Athenna/Core/HttpServer')
+
     return Server.request({ url, method: 'DELETE', ...options }).then(res =>
       this.#createResponse(res),
     )
