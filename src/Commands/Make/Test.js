@@ -57,7 +57,7 @@ export class MakeTest extends Command {
   async handle(name, options) {
     let resource = 'Test'
     let template = 'test'
-    let path = Path.tests(`E2E/${name}.js`)
+    let path = Path.tests(`E2E/${name}.${Path.ext()}`)
 
     if (!options.class) {
       resource = 'TestFn'
@@ -65,7 +65,7 @@ export class MakeTest extends Command {
     }
 
     if (options.unit) {
-      path = Path.tests(`Unit/${name}.js`)
+      path = Path.tests(`Unit/${name}.${Path.ext()}`)
     }
 
     this.title(`MAKING ${resource}\n`, 'bold', 'green')
