@@ -77,6 +77,6 @@ export class Test extends Command {
       process.env.DEBUG = 'api:*'
     }
 
-    await Module.import(Path.tests('main.js'))
+    await Module.import(Path.tests(`main.${Path.ext()}`))
   }
 }

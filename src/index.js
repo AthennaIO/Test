@@ -64,7 +64,8 @@ export class Test {
         !removeMethods.includes(name) &&
         (name.startsWith('it') ||
           name.startsWith('test') ||
-          name.startsWith('should')),
+          name.startsWith('should') ||
+          name.startsWith('PIN')),
     )
   }
 
@@ -84,6 +85,10 @@ export class Test {
         const japaTest = test(testName, this[testName].bind(this)).timeout(
           this.timeout,
         )
+
+        if (testName.startsWith('PIN')) {
+          japaTest.pin()
+        }
 
         if (!this.runOnly || !this.runOnly.length) {
           return
