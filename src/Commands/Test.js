@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { Config } from '@athenna/config'
 import { Command } from '@athenna/artisan'
 import { Module, Path } from '@athenna/common'
 
@@ -56,8 +55,6 @@ export class Test extends Command {
    * @return {Promise<void>}
    */
   async handle(options) {
-    Config.configs.clear()
-
     process.env.NODE_ENV = options.env
     process.env.BOOT_LOGS = 'false'
 
