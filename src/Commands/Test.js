@@ -55,6 +55,7 @@ export class Test extends Command {
    * @return {Promise<void>}
    */
   async handle(options) {
+    process.env.IS_ARTISAN = 'false'
     process.env.NODE_ENV = options.env
     process.env.BOOT_LOGS = 'false'
 
