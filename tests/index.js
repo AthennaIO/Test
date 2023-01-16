@@ -37,7 +37,7 @@ configure({
         name: 'E2E',
         files: ['tests/E2E/**/*Test.js', 'tests/E2E/**/*TestFn.js'],
         configure: suite => {
-          return TestSuite.httpEnd2EndSuite(suite)
+          return TestSuite.httpEnd2EndSuite(import.meta.url, suite)
         },
       },
       {

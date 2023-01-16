@@ -57,11 +57,15 @@ export class TestSuite {
   /**
    * Creates the cli test suite.
    *
+   * @param {string} metaUrl
    * @param {any} suite
    */
-  static cliEnd2EndSuite(suite) {
+  static cliEnd2EndSuite(metaUrl, suite) {
     return suite.setup(async () => {
-      const application = await new Ignite().fire()
+      const application = await new Ignite().fire(metaUrl, {
+        bootLogs: false,
+        shutdownLogs: false,
+      })
 
       TestContext.macro('request', () => {})
 
@@ -74,18 +78,22 @@ export class TestSuite {
   /**
    * Creates the http test suite.
    *
+   * @param {string} metalUrl
    * @param {any} suite
    */
-  static httpEnd2EndSuite(suite) {
+  static httpEnd2EndSuite(metalUrl, suite) {
     return suite.setup(async () => {
-      const application = await new Ignite().fire()
+      const application = await new Ignite().fire(metalUrl, {
+        bootLogs: false,
+        shutdownLogs: false,
+      })
 
       await application.bootArtisan()
       await application.bootHttpServer()
 
       TestContext.macro('request', new TestRequest())
 
-      return async () => await ProviderHelper.shutdownAll(false)
+      return async () => await ProviderHelper.shutdownAll()
     })
   }
 }
