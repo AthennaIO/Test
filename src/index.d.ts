@@ -471,16 +471,18 @@ export class TestSuite {
   /**
    * Creates the cli test suite.
    *
+   * @param {string} metalUrl
    * @param {any} suite
    */
-  static cliEnd2EndSuite(suite: any): void
+  static cliEnd2EndSuite(metalUrl: string, suite: any): void
 
   /**
    * Creates the http test suite.
    *
+   * @param {string} metalUrl
    * @param {any} suite
    */
-  static httpEnd2EndSuite(suite: any): void
+  static httpEnd2EndSuite(metalUrl: string, suite: any): void
 }
 
 export class TestLoader {
