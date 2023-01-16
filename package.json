@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -45,8 +45,8 @@
     "@athenna/artisan": "3.0.9",
     "@athenna/common": "3.0.2",
     "@athenna/config": "3.0.4",
-    "@athenna/core": "3.0.13",
-    "@athenna/http": "3.0.9",
+    "@athenna/core": "3.0.14",
+    "@athenna/http": "3.0.10",
     "@athenna/ioc": "3.0.2",
     "@athenna/logger": "3.0.9",
     "@fastify/cors": "8.1.1",
