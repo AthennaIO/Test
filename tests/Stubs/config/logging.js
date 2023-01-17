@@ -30,31 +30,31 @@ export default {
 
   channels: {
     stack: {
-      driver: 'stack',
+      driver: 'null',
       channels: ['application'],
     },
 
     application: {
-      driver: 'console',
+      driver: 'null',
       level: 'trace',
 
       formatter: 'simple',
     },
     console: {
-      driver: 'console',
+      driver: 'null',
       level: 'trace',
 
       formatter: 'cli',
     },
     exception: {
-      driver: 'console',
+      driver: 'null',
       level: 'trace',
       streamType: 'stderr',
 
       formatter: 'none',
     },
     request: {
-      driver: 'console',
+      driver: 'null',
       level: 'trace',
 
       formatter: 'request',
@@ -66,7 +66,7 @@ export default {
       driver: 'null',
     },
     file: {
-      driver: 'file',
+      driver: 'null',
       level: 'trace',
       filePath: Path.logs('athenna.log'),
 
@@ -74,7 +74,7 @@ export default {
       formatterConfig: {},
     },
     slack: {
-      driver: 'slack',
+      driver: 'null',
       level: 'fatal',
       url: 'your-slack-webhook-url',
 
@@ -82,7 +82,7 @@ export default {
       formatterConfig: {},
     },
     discord: {
-      driver: 'discord',
+      driver: 'null',
       level: 'fatal',
       username: 'Athenna',
       url: 'your-discord-webhook-url',
@@ -91,7 +91,7 @@ export default {
       formatterConfig: {},
     },
     telegram: {
-      driver: 'telegram',
+      driver: 'null',
       level: 'fatal',
       chatId: 0,
       parseMode: 'HTML',
