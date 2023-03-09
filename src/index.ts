@@ -7,6 +7,29 @@
  * file that was distributed with this source code.
  */
 
+declare module '@japa/assert' {
+  export interface Assert {
+    throws(fn: () => any, errType: any, message?: string): void
+    doesNotThrows(fn: () => any, errType: any, message?: string): void
+    rejects(
+      fn: () => any | Promise<any>,
+      errType: any,
+      message?: string,
+    ): Promise<any>
+    doesNotRejects(
+      fn: () => any | Promise<any>,
+      errType: any,
+      message?: string,
+    ): Promise<any>
+  }
+}
+
+declare module '@japa/runner' {
+  interface TestContext {
+    assert: import('@japa/assert').Assert
+  }
+}
+
 export * from './Helpers/Importer.js'
 export * from './Decorators/AfterAll.js'
 export * from './Decorators/AfterEach.js'
