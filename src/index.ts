@@ -31,6 +31,7 @@ declare module '@japa/runner' {
 }
 
 export * from './Helpers/Importer.js'
+export * from './Helpers/ExitFaker.js'
 export * from './Decorators/AfterAll.js'
 export * from './Decorators/AfterEach.js'
 export * from './Decorators/BeforeAll.js'
