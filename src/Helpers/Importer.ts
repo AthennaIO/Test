@@ -33,11 +33,13 @@ export class Importer {
     const test = new Test()
     const bind = (method: string) => test[method].bind(test)
 
-    const tests: ObjectBuilder = Reflect.getMetadata('tests', Test)
-    const afterAllHooks = Reflect.getMetadata('hooks:afterAll', Test)
-    const afterEachHooks = Reflect.getMetadata('hooks:afterEach', Test)
-    const beforeAllHooks = Reflect.getMetadata('hooks:beforeAll', Test)
-    const beforeEachHooks = Reflect.getMetadata('hooks:beforeEach', Test)
+    const {
+      tests,
+      afterAllHooks,
+      afterEachHooks,
+      beforeAllHooks,
+      beforeEachHooks,
+    } = Importer.getClassMetadata(Test)
 
     japaTest.group(Test.name, group => {
       beforeAllHooks.forEach(({ method }) => group.setup(bind(method)))
@@ -49,5 +51,21 @@ export class Importer {
         TestConverter.convert(bind(method), tests.get(method)),
       )
     })
+  }
+
+  /**
+   * Get all the class metadata or return default empty values to prevent
+   * errors.
+   */
+  private static getClassMetadata(target: any) {
+    return {
+      tests:
+        Reflect.getMetadata('tests', target) ||
+        new ObjectBuilder({ referencedValues: true }),
+      afterAllHooks: Reflect.getMetadata('hooks:afterAll', target) || [],
+      afterEachHooks: Reflect.getMetadata('hooks:afterEach', target) || [],
+      beforeAllHooks: Reflect.getMetadata('hooks:beforeAll', target) || [],
+      beforeEachHooks: Reflect.getMetadata('hooks:beforeEach', target) || [],
+    }
   }
 }
