@@ -40,7 +40,7 @@ process.env.IS_TS = 'true'
 configure({
   ...processCliArgs(process.argv.slice(2)),
   ...{
-    files: ['tests/**/*Test.ts'],
+    files: ['tests/Unit/**/*Test.ts'],
     plugins: [assert()],
     reporters: [specReporter()],
     importer: Importer.import,
