@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
