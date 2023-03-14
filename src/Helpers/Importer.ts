@@ -31,7 +31,15 @@ export class Importer {
     }
 
     const test = new Test()
-    const bind = (method: string) => test[method].bind(test)
+    const bind = (method: string) => {
+      const closure = test[method]
+
+      if (!closure) {
+        return null
+      }
+
+      return closure.bind(test)
+    }
 
     const {
       tests,

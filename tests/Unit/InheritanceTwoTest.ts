@@ -10,9 +10,9 @@
 import { Test, TestContext } from '#src'
 import { BaseTest } from '#tests/Stubs/BaseTest'
 
-export default class InheritanceTest extends BaseTest {
+export default class InheritanceTwoTest extends BaseTest {
   @Test()
-  public async shouldBeAbleToUseInheritanceInTestClasses({ assert }: TestContext) {
+  public async shouldBeAbleToUseInheritanceInTestInheritanceTwoTestClass({ assert }: TestContext) {
     assert.equal(this.BEFORE_EACH_EXECUTED, true)
   }
 }

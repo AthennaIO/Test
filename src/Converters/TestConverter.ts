@@ -16,6 +16,10 @@ export class TestConverter {
    * Convert test options of decorators to Japa test options.
    */
   public static async convert(closure: any, options: TestOptions) {
+    if (!closure) {
+      return
+    }
+
     const test = japaTest(options.title)
 
     this.whenDefined(options.pin, () => test.pin())
