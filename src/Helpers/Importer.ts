@@ -50,10 +50,26 @@ export class Importer {
     } = Importer.getClassMetadata(Test)
 
     japaTest.group(Test.name, group => {
-      beforeAllHooks.forEach(({ method }) => group.setup(bind(method)))
-      afterAllHooks.forEach(({ method }) => group.teardown(bind(method)))
-      beforeEachHooks.forEach(({ method }) => group.each.setup(bind(method)))
-      afterEachHooks.forEach(({ method }) => group.each.teardown(bind(method)))
+      beforeAllHooks.forEach(({ method }) => {
+        const closure = bind(method)
+
+        if (closure) group.setup(closure)
+      })
+      afterAllHooks.forEach(({ method }) => {
+        const closure = bind(method)
+
+        if (closure) group.teardown(closure)
+      })
+      beforeEachHooks.forEach(({ method }) => {
+        const closure = bind(method)
+
+        if (closure) group.each.setup(closure)
+      })
+      afterEachHooks.forEach(({ method }) => {
+        const closure = bind(method)
+
+        if (closure) group.each.teardown(closure)
+      })
 
       Object.keys(tests.get()).forEach(method =>
         TestConverter.convert(bind(method), tests.get(method)),
