@@ -11,6 +11,10 @@ import { pathToFileURL } from 'node:url'
 import { test as japaTest } from '@japa/runner'
 import { Module, ObjectBuilder } from '@athenna/common'
 import { TestConverter } from '#src/Converters/TestConverter'
+import { AfterAllHookException } from '#src/Exceptions/AfterAllHookException'
+import { AfterEachHookException } from '#src/Exceptions/AfterEachHookException'
+import { BeforeAllHookException } from '#src/Exceptions/BeforeAllHookException'
+import { BeforeEachHookException } from '#src/Exceptions/BeforeEachHookException'
 
 export class Importer {
   /**
@@ -53,28 +57,88 @@ export class Importer {
       beforeAllHooks.forEach(({ method }) => {
         const closure = bind(method)
 
-        if (closure) group.setup(closure)
+        if (!closure) return
+
+        group.setup(
+          Importer.handleHook(
+            method,
+            Test.name,
+            closure,
+            BeforeAllHookException,
+          ),
+        )
       })
+
       afterAllHooks.forEach(({ method }) => {
         const closure = bind(method)
 
-        if (closure) group.teardown(closure)
+        if (!closure) return
+
+        group.teardown(
+          Importer.handleHook(
+            method,
+            Test.name,
+            closure,
+            AfterAllHookException,
+          ),
+        )
       })
+
       beforeEachHooks.forEach(({ method }) => {
         const closure = bind(method)
 
-        if (closure) group.each.setup(closure)
+        if (!closure) return
+
+        group.each.setup(
+          Importer.handleHook(
+            method,
+            Test.name,
+            closure,
+            BeforeEachHookException,
+          ),
+        )
       })
+
       afterEachHooks.forEach(({ method }) => {
         const closure = bind(method)
 
-        if (closure) group.each.teardown(closure)
+        if (!closure) return
+
+        group.each.teardown(
+          Importer.handleHook(
+            method,
+            Test.name,
+            closure,
+            AfterEachHookException,
+          ),
+        )
       })
 
       Object.keys(tests.get()).forEach(method =>
         TestConverter.convert(bind(method), tests.get(method)),
       )
     })
+  }
+
+  /**
+   * Creates a new closure to handle hook execution and errors.
+   */
+  private static handleHook(
+    method: string,
+    className: string,
+    closure: any,
+    Exception: any,
+  ) {
+    return async () => {
+      try {
+        await closure()
+      } catch (error) {
+        const exception = new Exception(method, className, error)
+
+        console.error(await exception.prettify())
+        process.exit(1)
+      }
+    }
   }
 
   /**
