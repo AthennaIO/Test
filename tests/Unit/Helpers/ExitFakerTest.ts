@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { Test, ExitFaker, TestContext } from '#src'
+import { Test, ExitFaker, Context } from '#src'
 
 export default class ExitFakerTest {
   @Test()
-  public async shouldBeAbleToFakeTheProcessExitMethod({ assert }: TestContext) {
+  public async shouldBeAbleToFakeTheProcessExitMethod({ assert }: Context) {
     ExitFaker.fake()
 
     process.exit(1)
@@ -20,7 +20,7 @@ export default class ExitFakerTest {
   }
 
   @Test()
-  public async shouldBeAbleToRealeaseTheFakedProcessExitMethodToReturnToTheOriginalState({ assert }: TestContext) {
+  public async shouldBeAbleToRealeaseTheFakedProcessExitMethodToReturnToTheOriginalState({ assert }: Context) {
     ExitFaker.fake()
 
     process.exit(1)

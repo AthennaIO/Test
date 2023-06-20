@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { TestContext } from '#src/Types/TestContext'
+import { Context } from '#src/types/Context'
 import { TestHooksHandler, TestHooksCleanupHandler } from '@japa/core'
 
-export interface TestOptions {
+export interface Options {
   title?: string
   pin?: boolean
   fails?: boolean
@@ -21,7 +21,7 @@ export interface TestOptions {
   retry?: number
   with?: any[]
   waitForDone?: boolean
-  setup?: TestHooksHandler<TestContext>
-  teardown?: TestHooksHandler<TestContext>
-  cleanup?: TestHooksCleanupHandler<TestContext>
+  setup?: TestHooksHandler<Context>
+  teardown?: TestHooksHandler<Context>
+  cleanup?: TestHooksCleanupHandler<Context>
 }

@@ -8,8 +8,9 @@
  */
 
 import 'reflect-metadata'
+
 import { ObjectBuilder } from '@athenna/common'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
 
 /**
  * Expect the test to fail. Helpful in creating test cases to
@@ -19,7 +20,7 @@ export function Fails(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

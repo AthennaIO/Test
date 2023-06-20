@@ -7,47 +7,56 @@
  * file that was distributed with this source code.
  */
 
-declare module '@japa/assert' {
-  export interface Assert {
-    throws(fn: () => any, errType: any, message?: string): void
-    doesNotThrows(fn: () => any, errType: any, message?: string): void
-    rejects(
-      fn: () => any | Promise<any>,
-      errType: any,
-      message?: string,
-    ): Promise<any>
-    doesNotRejects(
-      fn: () => any | Promise<any>,
-      errType: any,
-      message?: string,
-    ): Promise<any>
-  }
+import { assert, Assert } from '@japa/assert'
+import { specReporter } from '@japa/spec-reporter'
+import { runFailedTests } from '@japa/run-failed-tests'
+import {
+  type Config,
+  type PluginFn,
+  run,
+  test,
+  configure,
+  processCliArgs,
+} from '@japa/runner'
+
+export {
+  Assert,
+  Config,
+  PluginFn,
+  run,
+  test,
+  assert,
+  configure,
+  processCliArgs,
+  specReporter,
+  runFailedTests,
 }
 
-declare module '@japa/runner' {
-  interface TestContext {
-    assert: import('@japa/assert').Assert
-  }
-}
+export * from '#src/globals/Assert'
+export * from '#src/globals/Context'
 
-export * from './Helpers/Importer.js'
-export * from './Helpers/ExitFaker.js'
-export * from './Decorators/AfterAll.js'
-export * from './Decorators/AfterEach.js'
-export * from './Decorators/BeforeAll.js'
-export * from './Decorators/BeforeEach.js'
-export * from './Decorators/Cleanup.js'
-export * from './Decorators/DisableTimeout.js'
-export * from './Decorators/Fails.js'
-export * from './Decorators/Pin.js'
-export * from './Decorators/Retry.js'
-export * from './Decorators/Setup.js'
-export * from './Decorators/Skip.js'
-export * from './Decorators/Tags.js'
-export * from './Decorators/Teardown.js'
-export * from './Decorators/Test.js'
-export * from './Decorators/TestCase.js'
-export * from './Decorators/Timeout.js'
-export * from './Decorators/WaitForDone.js'
-export * from './Types/TestOptions.js'
-export * from './Types/TestContext.js'
+export * from '#src/helpers/Runner'
+export * from '#src/helpers/Importer'
+export * from '#src/helpers/ExitFaker'
+export * from '#src/decorators/AfterAll'
+export * from '#src/decorators/AfterEach'
+export * from '#src/decorators/BeforeAll'
+export * from '#src/decorators/BeforeEach'
+export * from '#src/decorators/Cleanup'
+export * from '#src/decorators/DisableTimeout'
+export * from '#src/decorators/Fails'
+export * from '#src/decorators/Pin'
+export * from '#src/decorators/Retry'
+export * from '#src/decorators/Setup'
+export * from '#src/decorators/Skip'
+export * from '#src/decorators/Tags'
+export * from '#src/decorators/Teardown'
+export * from '#src/decorators/Test'
+export * from '#src/decorators/TestCase'
+export * from '#src/decorators/Timeout'
+export * from '#src/decorators/WaitForDone'
+export * from '#src/types/Options'
+export * from '#src/types/Context'
+export * from '#src/types/SetupHandler'
+export * from '#src/types/CleanupHandler'
+export * from '#src/types/TeardownHandler'

@@ -8,8 +8,9 @@
  */
 
 import 'reflect-metadata'
+
 import { ObjectBuilder } from '@athenna/common'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
 
 /**
  * Set the test timeout.
@@ -18,7 +19,7 @@ export function Timeout(timeout: number): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

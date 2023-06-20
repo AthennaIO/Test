@@ -8,8 +8,9 @@
  */
 
 import 'reflect-metadata'
+
 import { ObjectBuilder } from '@athenna/common'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
 
 /**
  * Define the dataset for the test case. The test executor will be invoked
@@ -19,7 +20,7 @@ export function TestCase(value: any): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
     const cases = tests.get(`${property}.with`, [])

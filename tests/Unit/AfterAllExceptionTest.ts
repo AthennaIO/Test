@@ -8,7 +8,7 @@
  */
 
 import { Exception } from '@athenna/common'
-import { Test, BeforeAll, ExitFaker, AfterAll, TestContext } from '#src'
+import { Test, BeforeAll, ExitFaker, AfterAll, Context } from '#src'
 
 export default class AfterAllExceptionTest {
   @BeforeAll()
@@ -32,7 +32,7 @@ export default class AfterAllExceptionTest {
   }
 
   @Test()
-  public async shouldBeEqual({ assert }: TestContext) {
+  public async shouldBeEqual({ assert }: Context) {
     assert.equal(1, 1)
   }
 }

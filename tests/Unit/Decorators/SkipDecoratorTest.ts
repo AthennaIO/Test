@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Test, Skip } from '#src'
-import { test } from '@japa/runner'
+import { test, Test, Skip } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 test.group('SkipDecoratorTest', () => {

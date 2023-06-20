@@ -10,7 +10,7 @@
 import {
   TestCase,
   Test,
-  TestContext,
+  Context,
   Fails,
   WaitForDone,
   DisableTimeout,
@@ -56,39 +56,39 @@ export default class DecoratedTest {
 
   @Test()
   @DisableTimeout()
-  public async shouldBeAbleToDisableTheTestTimeout({ test, assert }: TestContext) {
+  public async shouldBeAbleToDisableTheTestTimeout({ test, assert }: Context) {
     assert.equal(test.options.timeout, 0)
   }
 
   @Test()
   @Timeout(1335)
-  public async shouldBeAbleToSetAnyTestTimeout({ test, assert }: TestContext) {
+  public async shouldBeAbleToSetAnyTestTimeout({ test, assert }: Context) {
     assert.equal(test.options.timeout, 1335)
   }
 
   @Test()
   @Tags(['users', 'customers'])
-  public async shouldBeAbleToSetTestTags({ test, assert }: TestContext) {
+  public async shouldBeAbleToSetTestTags({ test, assert }: Context) {
     assert.deepEqual(test.options.tags, ['users', 'customers'])
   }
 
   @Test()
   @TestCase('lenon@athenna.io')
   @TestCase('txsoura@athenna.io')
-  public async shouldBeAbleToRunTestCases({ test, assert }: TestContext, value: any) {
+  public async shouldBeAbleToRunTestCases({ test, assert }: Context, value: any) {
     assert.isTrue(value.includes('@athenna.io'))
     assert.deepEqual(test.dataset, ['txsoura@athenna.io', 'lenon@athenna.io'])
   }
 
   @Test()
   @Retry(2)
-  public async shouldBeAbleToSetTestRetry({ test, assert }: TestContext) {
+  public async shouldBeAbleToSetTestRetry({ test, assert }: Context) {
     assert.deepEqual(test.options.retries, 2)
   }
 
   @Test()
   @Setup(setup)
-  public async shouldBeAbleToSetTestSetup({ assert }: TestContext) {
+  public async shouldBeAbleToSetTestSetup({ assert }: Context) {
     assert.isTrue(SETUP_EXECUTED)
   }
 
@@ -105,12 +105,12 @@ export default class DecoratedTest {
   }
 
   @Test()
-  public async shouldHaveExecutedBeforeAllMethod({ assert }: TestContext) {
+  public async shouldHaveExecutedBeforeAllMethod({ assert }: Context) {
     assert.isTrue(BEFORE_ALL_EXECUTED)
   }
 
   @Test()
-  public async shouldHaveExecutedBeforeEachMethod({ assert }: TestContext) {
+  public async shouldHaveExecutedBeforeEachMethod({ assert }: Context) {
     assert.isTrue(BEFORE_EACH_EXECUTED)
   }
 }

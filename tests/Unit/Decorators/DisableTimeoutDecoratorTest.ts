@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { test } from '@japa/runner'
-import { Test, DisableTimeout } from '#src'
+import { test, Test, DisableTimeout } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 test.group('DisableTimeoutDecoratorTest', () => {

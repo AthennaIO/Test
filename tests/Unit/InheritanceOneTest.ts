@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { BaseTest } from '#tests/Stubs/BaseTest'
-import { AfterAll, AfterEach, BeforeAll, BeforeEach, Test, TestContext } from '#src'
+import { BaseTest } from '#tests/stubs/BaseTest'
+import { AfterAll, AfterEach, BeforeAll, BeforeEach, Test, Context } from '#src'
 
 export default class InheritanceOneTest extends BaseTest {
   @AfterAll()
@@ -26,7 +26,7 @@ export default class InheritanceOneTest extends BaseTest {
   // The hooks above triggers makes the importer verify if the class has the method or not.
 
   @Test()
-  public async shouldBeAbleToUseInheritanceInTestInheritanceOneTestClass({ assert }: TestContext) {
+  public async shouldBeAbleToUseInheritanceInTestInheritanceOneTestClass({ assert }: Context) {
     assert.equal(this.BEFORE_EACH_EXECUTED, true)
   }
 }

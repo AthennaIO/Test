@@ -8,7 +8,7 @@
  */
 
 import { Exception } from '@athenna/common'
-import { Test, BeforeAll, ExitFaker, TestContext, AfterAll } from '#src'
+import { Test, BeforeAll, ExitFaker, Context, AfterAll } from '#src'
 
 export default class BeforeAllExceptionTest {
   @BeforeAll()
@@ -32,7 +32,7 @@ export default class BeforeAllExceptionTest {
   }
 
   @Test()
-  public async shouldLogAnExceptionWhenBeforeAllHookFails({ assert }: TestContext) {
+  public async shouldLogAnExceptionWhenBeforeAllHookFails({ assert }: Context) {
     assert.isTrue(ExitFaker.faker.calledTwice)
     assert.isTrue(ExitFaker.faker.calledWith(1))
   }

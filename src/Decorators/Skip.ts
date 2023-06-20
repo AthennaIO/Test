@@ -8,8 +8,9 @@
  */
 
 import 'reflect-metadata'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+
 import { ObjectBuilder } from '@athenna/common'
+import { Decorator } from '#src/helpers/Decorator'
 
 /**
  * Skip the test conditionally.
@@ -18,7 +19,7 @@ export function Skip(reason?: string): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

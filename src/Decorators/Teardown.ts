@@ -8,21 +8,20 @@
  */
 
 import 'reflect-metadata'
-import { TestHooksHandler } from '@japa/core'
+
+import { Context } from '#src/types/Context'
 import { ObjectBuilder } from '@athenna/common'
-import { TestContext } from '#src/Types/TestContext'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
+import { TeardownHandler } from '#src/types/TeardownHandler'
 
 /**
  * Register a teardown hook from within the test.
  */
-export function Teardown(
-  handler: TestHooksHandler<TestContext>,
-): MethodDecorator {
+export function Teardown(handler: TeardownHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

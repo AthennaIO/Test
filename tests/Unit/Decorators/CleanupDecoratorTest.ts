@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { test } from '@japa/runner'
-import { Test, Cleanup } from '#src'
+import { test, Test, Cleanup } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 function cleanup() {}

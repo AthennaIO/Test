@@ -9,21 +9,19 @@
 
 import 'reflect-metadata'
 
+import { Context } from '#src/types/Context'
 import { ObjectBuilder } from '@athenna/common'
-import { TestContext } from '#src/Types/TestContext'
-import { TestHooksCleanupHandler } from '@japa/core'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
+import { CleanupHandler } from '#src/types/CleanupHandler'
 
 /**
  * Register a cleanup hook from within the test.
  */
-export function Cleanup(
-  handler: TestHooksCleanupHandler<TestContext>,
-): MethodDecorator {
+export function Cleanup(handler: CleanupHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

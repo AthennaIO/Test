@@ -8,19 +8,20 @@
  */
 
 import 'reflect-metadata'
-import { TestHooksHandler } from '@japa/core'
+
+import { Context } from '#src/types/Context'
 import { ObjectBuilder } from '@athenna/common'
-import { TestContext } from '#src/Types/TestContext'
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
+import { SetupHandler } from '#src/types/SetupHandler'
 
 /**
  * Register a setup hook from within the test.
  */
-export function Setup(handler: TestHooksHandler<TestContext>): MethodDecorator {
+export function Setup(handler: SetupHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

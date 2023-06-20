@@ -15,11 +15,13 @@ export class BeforeEachHookException extends Exception {
       error = error.toAthennaException()
     }
 
-    error.message = `An exception has ocurred while running the ${Color.green.bold(
-      '@BeforeEach',
-    )} hook of ${Color.yellow.bold(method)} method in class ${Color.yellow.bold(
-      className,
-    )} class.\n\n${Color.gray.bold.bgYellow(' MESSAGE ')}\n\n${error.message}`
+    const hook = Color.green.bold('@BeforeEach')
+    const classMethod = Color.yellow.bold(`${className}.${method}`)
+    const message = `${Color.gray.bold.bgYellow(' MESSAGE ')}\n\n${
+      error.message
+    }`
+
+    error.message = `An exception has occurred while running the ${hook} hook in ${classMethod} method.\n\n${message}`
 
     super({
       code: 'E_BEFORE_EACH_HOOK',

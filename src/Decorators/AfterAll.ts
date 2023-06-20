@@ -9,7 +9,7 @@
 
 import 'reflect-metadata'
 
-import { DecoratorHelper } from '#src/Helpers/DecoratorHelper'
+import { Decorator } from '#src/helpers/Decorator'
 
 /**
  * Create a new after all (teardown) hook.
@@ -18,7 +18,7 @@ export function AfterAll(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    DecoratorHelper.defineDefaultMetadata(Target)
+    Decorator.defineDefaultMetadata(Target)
 
     const afterAllHooks = Reflect.getMetadata('hooks:afterAll', Target)
 

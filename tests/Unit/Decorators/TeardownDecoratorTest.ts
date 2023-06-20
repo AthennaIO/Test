@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Test, Teardown } from '#src'
-import { test } from '@japa/runner'
+import { test, Test, Teardown } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 function teardown() {}

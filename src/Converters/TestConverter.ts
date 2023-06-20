@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import { TestOptions } from '#src'
 import { Is } from '@athenna/common'
-import { test as japaTest } from '@japa/runner'
+import { test as japaTest } from '#src'
+import { Options } from '#src/types/Options'
 
 export class TestConverter {
   /**
    * Convert test options of decorators to Japa test options.
    */
-  public static async convert(closure: any, options: TestOptions) {
+  public static async convert(closure: any, options: Options) {
     if (!closure) {
       return
     }
@@ -48,7 +48,7 @@ export class TestConverter {
   }
 
   /**
-   * Execute some closure when statement is defined.
+   * Execute some closure when a statement is defined.
    */
   private static whenDefined(statement: any, closure: any) {
     if (!Is.Defined(statement)) {

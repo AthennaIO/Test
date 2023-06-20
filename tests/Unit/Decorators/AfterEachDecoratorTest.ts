@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { AfterEach } from '#src'
-import { test } from '@japa/runner'
+import { test, AfterEach } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 test.group('AfterEachDecoratorTest', () => {

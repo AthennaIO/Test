@@ -10,11 +10,11 @@
 import { pathToFileURL } from 'node:url'
 import { test as japaTest } from '@japa/runner'
 import { Module, ObjectBuilder } from '@athenna/common'
-import { TestConverter } from '#src/Converters/TestConverter'
-import { AfterAllHookException } from '#src/Exceptions/AfterAllHookException'
-import { AfterEachHookException } from '#src/Exceptions/AfterEachHookException'
-import { BeforeAllHookException } from '#src/Exceptions/BeforeAllHookException'
-import { BeforeEachHookException } from '#src/Exceptions/BeforeEachHookException'
+import { TestConverter } from '#src/converters/TestConverter'
+import { AfterAllHookException } from '#src/exceptions/AfterAllHookException'
+import { AfterEachHookException } from '#src/exceptions/AfterEachHookException'
+import { BeforeAllHookException } from '#src/exceptions/BeforeAllHookException'
+import { BeforeEachHookException } from '#src/exceptions/BeforeEachHookException'
 
 export class Importer {
   /**

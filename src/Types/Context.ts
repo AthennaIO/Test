@@ -9,4 +9,4 @@
 
 import { TestContext } from '@japa/runner'
 
-export { TestContext }
+export type Context = TestContext

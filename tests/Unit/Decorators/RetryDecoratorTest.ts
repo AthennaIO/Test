@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Test, Retry } from '#src'
-import { test } from '@japa/runner'
+import { test, Test, Retry } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 test.group('RetryDecoratorTest', () => {

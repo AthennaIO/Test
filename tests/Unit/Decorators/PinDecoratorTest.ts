@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Test, Pin } from '#src'
-import { test } from '@japa/runner'
+import { test, Test, Pin } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
 test.group('PinDecoratorTest', () => {
