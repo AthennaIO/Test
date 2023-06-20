@@ -19,9 +19,9 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "#bin/*": ["./bin/*.ts"],
-      "#src/*": ["./src/*.ts"],
-      "#tests/*": ["./tests/*.ts"]
+      "#bin/*": ["./bin/*.js"],
+      "#src/*": ["./src/*.js"],
+      "#tests/*": ["./tests/*.js"]
     }
   },
   "include": ["./**/*"],
