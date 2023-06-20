@@ -81,12 +81,14 @@
     "include": [
       "src/**/*.ts"
     ],
-    "exclude": [],
+    "exclude": [
+      "src/helpers/Runner.ts"
+    ],
     "reporter": [
       "text-summary",
       "html"
     ],
-    "report-dir": "./tests/Coverage",
+    "report-dir": "./tests/coverage",
     "check-coverage": true
   },
   "husky": {
