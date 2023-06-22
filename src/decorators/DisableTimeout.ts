@@ -13,7 +13,7 @@ import { ObjectBuilder } from '@athenna/common'
 import { Decorator } from '#src/helpers/Decorator'
 
 /**
- * Disable test timeout. It is same as calling `test.timeout(0)`
+ * Disable test timeout. It is the same as calling `test.timeout(0)`
  */
 export function DisableTimeout(): MethodDecorator {
   return (target: any, property: string, _: any) => {

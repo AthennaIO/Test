@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { fake, SinonSpy } from 'sinon'
+import type { SinonSpy } from 'sinon'
+import { fake } from 'sinon'
 
 export class ExitFaker {
   public static original = process.exit

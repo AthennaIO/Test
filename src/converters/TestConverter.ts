@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import type { Options } from '#src/types'
 import { Is } from '@athenna/common'
 import { test as japaTest } from '#src'
-import { Options } from '#src/types/Options'
 
 export class TestConverter {
   /**

@@ -9,10 +9,9 @@
 
 import 'reflect-metadata'
 
-import { Context } from '#src/types/Context'
+import type { Context, CleanupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
 import { Decorator } from '#src/helpers/Decorator'
-import { CleanupHandler } from '#src/types/CleanupHandler'
 
 /**
  * Register a cleanup hook from within the test.

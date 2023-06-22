@@ -9,10 +9,9 @@
 
 import 'reflect-metadata'
 
-import { Context } from '#src/types/Context'
+import type { Context, TeardownHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
 import { Decorator } from '#src/helpers/Decorator'
-import { TeardownHandler } from '#src/types/TeardownHandler'
 
 /**
  * Register a teardown hook from within the test.

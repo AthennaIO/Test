@@ -7,8 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import type { Context } from '#src/types'
 import { Exception } from '@athenna/common'
-import { Test, BeforeAll, ExitFaker, AfterEach, AfterAll, Context } from '#src'
+import { Test, BeforeAll, ExitFaker, AfterEach, AfterAll } from '#src'
 
 export default class AfterEachExceptionTest {
   @BeforeAll()
