@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { Test, ExitFaker, Context } from '#src'
+import type { Context } from '#src/types'
+import { Test, ExitFaker } from '#src'
 
 export default class ExitFakerTest {
   @Test()

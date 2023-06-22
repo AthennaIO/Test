@@ -7,8 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import type { Context } from '#src/types'
 import { BaseTest } from '#tests/stubs/BaseTest'
-import { AfterAll, AfterEach, BeforeAll, BeforeEach, Test, Context } from '#src'
+import { AfterAll, AfterEach, BeforeAll, BeforeEach, Test } from '#src'
 
 export default class InheritanceOneTest extends BaseTest {
   @AfterAll()

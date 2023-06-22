@@ -7,14 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import {
-  run,
-  configure,
-  processCliArgs,
-  Config,
-  Importer,
-  PluginFn,
-} from '#src'
+import type { Config, PluginFn } from '#src/types'
+import { run, configure, processCliArgs, Importer } from '#src'
 
 export class Runner {
   public static files: string[] = []

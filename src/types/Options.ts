@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { Context } from '#src/types/Context'
-import { TestHooksHandler, TestHooksCleanupHandler } from '@japa/core'
+import type { Context } from '#src/types/Context'
+import type { TestHooksHandler, TestHooksCleanupHandler } from '@japa/core'
 
 export interface Options {
   title?: string

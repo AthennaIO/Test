@@ -18,7 +18,7 @@ import { BeforeEachHookException } from '#src/exceptions/BeforeEachHookException
 
 export class Importer {
   /**
-   * Simple import some file path by href.
+   * Simple imports some file path by href.
    */
   public static async simpleImport(filePath: string): Promise<any> {
     return import(pathToFileURL(filePath).href)

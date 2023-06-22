@@ -10,19 +10,10 @@
 import { assert, Assert } from '@japa/assert'
 import { specReporter } from '@japa/spec-reporter'
 import { runFailedTests } from '@japa/run-failed-tests'
-import {
-  type Config,
-  type PluginFn,
-  run,
-  test,
-  configure,
-  processCliArgs,
-} from '@japa/runner'
+import { run, test, configure, processCliArgs } from '@japa/runner'
 
 export {
   Assert,
-  Config,
-  PluginFn,
   run,
   test,
   assert,
@@ -55,8 +46,3 @@ export * from '#src/decorators/Test'
 export * from '#src/decorators/TestCase'
 export * from '#src/decorators/Timeout'
 export * from '#src/decorators/WaitForDone'
-export * from '#src/types/Options'
-export * from '#src/types/Context'
-export * from '#src/types/SetupHandler'
-export * from '#src/types/CleanupHandler'
-export * from '#src/types/TeardownHandler'
