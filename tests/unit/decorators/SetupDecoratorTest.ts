@@ -12,8 +12,8 @@ import { ObjectBuilder } from '@athenna/common'
 
 function setup() {}
 
-test.group('SetupDecoratorTest', () => {
-  test('should be able to register tests of some class using test and setup decorator', async ({ assert }) => {
+test.group('SetupAnnotationTest', () => {
+  test('should be able to register tests of some class using test and setup annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Setup(setup)
@@ -29,7 +29,7 @@ test.group('SetupDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the setup decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the setup annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Setup(setup)
       public async thisWillBeIgnored() {}

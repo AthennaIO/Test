@@ -12,8 +12,8 @@ import { ObjectBuilder } from '@athenna/common'
 
 function teardown() {}
 
-test.group('TeardownDecoratorTest', () => {
-  test('should be able to register tests of some class using test and teardown decorator', async ({ assert }) => {
+test.group('TeardownAnnotationTest', () => {
+  test('should be able to register tests of some class using test and teardown annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Teardown(teardown)
@@ -29,7 +29,7 @@ test.group('TeardownDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the teardown decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the teardown annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Teardown(teardown)
       public async thisWillBeIgnored() {}

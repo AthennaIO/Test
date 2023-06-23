@@ -9,16 +9,16 @@
 
 import 'reflect-metadata'
 
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
  * Create a new after each (teardown.each) hook.
  */
-export function AfterEach(): MethodDecorator {
+export function AfterEach(): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const afterEachHooks = Reflect.getMetadata('hooks:afterEach', Target)
 

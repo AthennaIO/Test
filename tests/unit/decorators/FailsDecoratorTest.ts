@@ -10,8 +10,8 @@
 import { test, Test, Fails } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('FailsDecoratorTest', () => {
-  test('should be able to register tests of some class using test and fails decorator', async ({ assert }) => {
+test.group('FailsAnnotationTest', () => {
+  test('should be able to register tests of some class using test and fails annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Fails()
@@ -27,7 +27,7 @@ test.group('FailsDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the fails decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the fails annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Fails()
       public async thisWillBeIgnored() {}

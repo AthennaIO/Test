@@ -10,19 +10,23 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Create a new test.
+ * Define the dataset for the test case. The test executor will be invoked
+ * for all the items inside the dataset array.
  */
-export function Test(title?: string): MethodDecorator {
+export function TestCase(value: any): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
+    const cases = tests.get(`${property}.with`, [])
 
-    tests.set(`${property}.title`, title || property)
+    cases.push(value)
+
+    tests.set(`${property}.with`, cases)
   }
 }

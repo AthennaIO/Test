@@ -10,8 +10,8 @@
 import { test, Test, DisableTimeout } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('DisableTimeoutDecoratorTest', () => {
-  test('should be able to register tests of some class using test and disable timeout decorator', async ({
+test.group('DisableTimeoutAnnotationTest', () => {
+  test('should be able to register tests of some class using test and disable timeout annotation', async ({
     assert,
   }) => {
     class MyClass {
@@ -29,7 +29,7 @@ test.group('DisableTimeoutDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the disable timeout decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the disable timeout annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @DisableTimeout()
       public async thisWillBeIgnored() {}

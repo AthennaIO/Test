@@ -13,7 +13,7 @@ import { test as japaTest } from '#src'
 
 export class TestConverter {
   /**
-   * Convert test options of decorators to Japa test options.
+   * Convert test options of annotation to Japa test options.
    */
   public static async convert(closure: any, options: Options) {
     if (!closure) {

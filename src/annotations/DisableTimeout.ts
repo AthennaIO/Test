@@ -9,21 +9,20 @@
 
 import 'reflect-metadata'
 
-import type { Context, CleanupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Register a cleanup hook from within the test.
+ * Disable test timeout. It is the same as calling `test.timeout(0)`
  */
-export function Cleanup(handler: CleanupHandler<Context>): MethodDecorator {
+export function DisableTimeout(): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.cleanup`, handler)
+    tests.set(`${property}.disableTimeout`, true)
   }
 }

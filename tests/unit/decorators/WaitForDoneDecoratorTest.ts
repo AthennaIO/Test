@@ -10,8 +10,8 @@
 import { test, Test, WaitForDone } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('WaitForDoneDecoratorTest', () => {
-  test('should be able to register tests of some class using test and waitForDone decorator', async ({ assert }) => {
+test.group('WaitForDoneAnnotationTest', () => {
+  test('should be able to register tests of some class using test and waitForDone annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @WaitForDone()
@@ -27,7 +27,7 @@ test.group('WaitForDoneDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the waitForDone decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the waitForDone annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @WaitForDone()
       public async thisWillBeIgnored() {}

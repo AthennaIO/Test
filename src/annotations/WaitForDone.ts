@@ -10,19 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Skip the test conditionally.
+ * Wait for the test executor to call done method.
  */
-export function Skip(reason?: string): MethodDecorator {
+export function WaitForDone(): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.skip`, reason || true)
+    tests.set(`${property}.waitForDone`, true)
   }
 }

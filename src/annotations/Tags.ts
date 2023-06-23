@@ -9,21 +9,20 @@
 
 import 'reflect-metadata'
 
-import type { Context, SetupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Register a setup hook from within the test.
+ * Assign tags to the test. Later you can use the tags to run specific tests.
  */
-export function Setup(handler: SetupHandler<Context>): MethodDecorator {
+export function Tags(tags: string[]): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.setup`, handler)
+    tests.set(`${property}.tags`, tags)
   }
 }

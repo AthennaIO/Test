@@ -10,8 +10,8 @@
 import { test, Test, Tags } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('TagsDecoratorTest', () => {
-  test('should be able to register tests of some class using test and tags decorator', async ({ assert }) => {
+test.group('TagsAnnotationTest', () => {
+  test('should be able to register tests of some class using test and tags annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Tags(['users', 'customers'])
@@ -27,7 +27,7 @@ test.group('TagsDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the tags decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the tags annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Tags(['users', 'customers'])
       public async thisWillBeIgnored() {}

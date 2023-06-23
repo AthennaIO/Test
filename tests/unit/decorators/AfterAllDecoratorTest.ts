@@ -10,8 +10,8 @@
 import { test, AfterAll } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('AfterAllDecoratorTest', () => {
-  test('should be able to register after all hook of some class using after all decorator', async ({ assert }) => {
+test.group('AfterAllAnnotationTest', () => {
+  test('should be able to register after all hook of some class using after all annotation', async ({ assert }) => {
     class MyClass {
       @AfterAll()
       public async afterAll() {}

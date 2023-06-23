@@ -9,16 +9,16 @@
 
 import 'reflect-metadata'
 
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
  * Create a new before each (setup.each) hook.
  */
-export function BeforeEach(): MethodDecorator {
+export function BeforeEach(): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const beforeEachHooks = Reflect.getMetadata('hooks:beforeEach', Target)
 

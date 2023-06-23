@@ -9,21 +9,21 @@
 
 import 'reflect-metadata'
 
-import type { Context, TeardownHandler } from '#src/types'
+import type { Context, SetupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Register a teardown hook from within the test.
+ * Register a setup hook from within the test.
  */
-export function Teardown(handler: TeardownHandler<Context>): MethodDecorator {
+export function Setup(handler: SetupHandler<Context>): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.teardown`, handler)
+    tests.set(`${property}.setup`, handler)
   }
 }

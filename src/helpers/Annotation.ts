@@ -9,11 +9,11 @@
 
 import { ObjectBuilder } from '@athenna/common'
 
-export class Decorator {
+export class Annotation {
   /**
    * Define default metadata values in target.
    */
-  public static defineDefaultMetadata(target: any): typeof Decorator {
+  public static defineDefaultMetadata(target: any): typeof Annotation {
     if (!Reflect.hasMetadata('tests', target)) {
       Reflect.defineMetadata(
         'tests',

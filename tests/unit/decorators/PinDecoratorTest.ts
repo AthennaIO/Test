@@ -10,8 +10,8 @@
 import { test, Test, Pin } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('PinDecoratorTest', () => {
-  test('should be able to register tests of some class using test and pin decorator', async ({ assert }) => {
+test.group('PinAnnotationTest', () => {
+  test('should be able to register tests of some class using test and pin annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Pin()
@@ -27,7 +27,7 @@ test.group('PinDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the pin decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the pin annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Pin()
       public async thisWillBeIgnored() {}

@@ -10,19 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Pin the test. If one test is pinned, Japa will run only pinned tests.
+ * Skip the test conditionally.
  */
-export function Pin(): MethodDecorator {
+export function Skip(reason?: string): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.pin`, true)
+    tests.set(`${property}.skip`, reason || true)
   }
 }

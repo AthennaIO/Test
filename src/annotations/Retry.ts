@@ -10,19 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Assign tags to the test. Later you can use the tags to run specific tests.
+ * Configure the number of times this test should be retried when failing.
  */
-export function Tags(tags: string[]): MethodDecorator {
+export function Retry(times: number): MethodAnnotation {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.tags`, tags)
+    tests.set(`${property}.retry`, times)
   }
 }

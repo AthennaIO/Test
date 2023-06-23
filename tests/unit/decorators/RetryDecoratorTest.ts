@@ -10,8 +10,8 @@
 import { test, Test, Retry } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('RetryDecoratorTest', () => {
-  test('should be able to register tests of some class using test and retry decorator', async ({ assert }) => {
+test.group('RetryAnnotationTest', () => {
+  test('should be able to register tests of some class using test and retry annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Retry(2)
@@ -27,7 +27,7 @@ test.group('RetryDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the retry decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the retry annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Retry(2)
       public async thisWillBeIgnored() {}
