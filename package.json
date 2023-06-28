@@ -48,7 +48,7 @@
     "#tests": "./tests/index.js"
   },
   "dependencies": {
-    "@japa/assert": "^1.3.6",
+    "@japa/assert": "^1.4.1",
     "@japa/run-failed-tests": "^1.1.0",
     "@japa/runner": "^2.2.2",
     "@japa/spec-reporter": "^1.3.2",
