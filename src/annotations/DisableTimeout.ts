@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Disable test timeout. It is the same as calling `test.timeout(0)`
  */
-export function DisableTimeout(): MethodAnnotation {
+export function DisableTimeout(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

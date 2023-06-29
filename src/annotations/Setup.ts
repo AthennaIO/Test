@@ -9,14 +9,14 @@
 
 import 'reflect-metadata'
 
-import type { Context, SetupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
+import type { Context, SetupHandler } from '#src/types'
 
 /**
  * Register a setup hook from within the test.
  */
-export function Setup(handler: SetupHandler<Context>): MethodAnnotation {
+export function Setup(handler: SetupHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

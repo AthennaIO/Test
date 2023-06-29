@@ -10,7 +10,7 @@
 import type { Context } from '#src/types/Context'
 import type { TestHooksHandler, TestHooksCleanupHandler } from '@japa/core'
 
-export interface Options {
+export interface TestOptions {
   title?: string
   pin?: boolean
   fails?: boolean

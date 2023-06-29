@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Configure the number of times this test should be retried when failing.
  */
-export function Retry(times: number): MethodAnnotation {
+export function Retry(times: number): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

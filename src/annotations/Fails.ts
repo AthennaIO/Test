@@ -16,7 +16,7 @@ import { Annotation } from '#src/helpers/Annotation'
  * Expect the test to fail. Helpful in creating test cases to
  * showcase bugs.
  */
-export function Fails(): MethodAnnotation {
+export function Fails(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

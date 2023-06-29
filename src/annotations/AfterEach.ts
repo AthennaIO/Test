@@ -14,7 +14,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Create a new after each (teardown.each) hook.
  */
-export function AfterEach(): MethodAnnotation {
+export function AfterEach(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

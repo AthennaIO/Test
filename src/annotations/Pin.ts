@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Pin the test. If one test is pinned, Japa will run only pinned tests.
  */
-export function Pin(): MethodAnnotation {
+export function Pin(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

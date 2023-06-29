@@ -16,7 +16,7 @@ import { Annotation } from '#src/helpers/Annotation'
  * Define the dataset for the test case. The test executor will be invoked
  * for all the items inside the dataset array.
  */
-export function TestCase(value: any): MethodAnnotation {
+export function TestCase(value: any): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

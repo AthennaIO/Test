@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Skip the test conditionally.
  */
-export function Skip(reason?: string): MethodAnnotation {
+export function Skip(reason?: string): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

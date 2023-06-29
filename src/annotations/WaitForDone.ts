@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Wait for the test executor to call done method.
  */
-export function WaitForDone(): MethodAnnotation {
+export function WaitForDone(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

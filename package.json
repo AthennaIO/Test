@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -44,6 +44,7 @@
     "#src/*": "./src/*.js",
     "#src": "./src/index.js",
     "#src/types": "./src/types/index.js",
+    "#src/debug": "./src/debug/index.js",
     "#tests/*": "./tests/*.js",
     "#tests": "./tests/index.js"
   },
@@ -56,7 +57,7 @@
     "sinon": "^15.0.1"
   },
   "devDependencies": {
-    "@athenna/common": "^3.6.0",
+    "@athenna/common": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "c8": "^5.0.2",

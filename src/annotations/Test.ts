@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Create a new test.
  */
-export function Test(title?: string): MethodAnnotation {
+export function Test(title?: string): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

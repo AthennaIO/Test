@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Set the test timeout.
  */
-export function Timeout(timeout: number): MethodAnnotation {
+export function Timeout(timeout: number): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

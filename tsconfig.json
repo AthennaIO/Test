@@ -25,7 +25,8 @@
       "#bin/*": ["./bin/*.ts"],
       "#src/*": ["./src/*.ts"],
       "#tests/*": ["./tests/*.ts"],
-      "#src/types": ["./src/types/index.ts"]
+      "#src/types": ["./src/types/index.ts"],
+      "#src/debug": ["./src/debug/index.ts"]
     }
   },
   "include": ["./**/*"],

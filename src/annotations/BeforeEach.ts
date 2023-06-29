@@ -14,7 +14,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Create a new before each (setup.each) hook.
  */
-export function BeforeEach(): MethodAnnotation {
+export function BeforeEach(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

@@ -15,7 +15,7 @@ import { Annotation } from '#src/helpers/Annotation'
 /**
  * Assign tags to the test. Later you can use the tags to run specific tests.
  */
-export function Tags(tags: string[]): MethodAnnotation {
+export function Tags(tags: string[]): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

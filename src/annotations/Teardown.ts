@@ -9,14 +9,14 @@
 
 import 'reflect-metadata'
 
-import type { Context, TeardownHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
+import type { Context, TeardownHandler } from '#src/types'
 
 /**
  * Register a teardown hook from within the test.
  */
-export function Teardown(handler: TeardownHandler<Context>): MethodAnnotation {
+export function Teardown(handler: TeardownHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 

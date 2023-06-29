@@ -9,14 +9,14 @@
 
 import 'reflect-metadata'
 
-import type { Context, CleanupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
+import type { Context, CleanupHandler } from '#src/types'
 
 /**
  * Register a cleanup hook from within the test.
  */
-export function Cleanup(handler: CleanupHandler<Context>): MethodAnnotation {
+export function Cleanup(handler: CleanupHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
