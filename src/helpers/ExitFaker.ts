@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import type { SinonSpy } from 'sinon'
 import { fake } from 'sinon'
+import type { SinonSpy } from 'sinon'
 
 export class ExitFaker {
   public static original = process.exit
   public static faker: SinonSpy<[code?: number], never>
 
   /**
-   * Fake the process.exit method.
+   * Fake the process.exit() method.
    */
   public static fake(): typeof ExitFaker {
     this.faker = fake() as SinonSpy<[code?: number], never>
@@ -25,7 +25,7 @@ export class ExitFaker {
   }
 
   /**
-   * Release the faker process.exit method.
+   * Release the faker process.exit() method.
    */
   public static release(): typeof ExitFaker {
     this.faker = undefined

@@ -10,20 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Expect the test to fail. Helpful in creating test cases to
- * showcase bugs.
+ * Create a new test.
  */
-export function Fails(): MethodDecorator {
+export function Test(title?: string): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.fails`, true)
+    tests.set(`${property}.title`, title || property)
   }
 }

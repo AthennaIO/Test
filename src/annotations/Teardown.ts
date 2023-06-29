@@ -9,21 +9,21 @@
 
 import 'reflect-metadata'
 
-import type { Context, CleanupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
+import type { Context, TeardownHandler } from '#src/types'
 
 /**
- * Register a cleanup hook from within the test.
+ * Register a teardown hook from within the test.
  */
-export function Cleanup(handler: CleanupHandler<Context>): MethodDecorator {
+export function Teardown(handler: TeardownHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.cleanup`, handler)
+    tests.set(`${property}.teardown`, handler)
   }
 }

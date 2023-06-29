@@ -9,21 +9,20 @@
 
 import 'reflect-metadata'
 
-import type { Context, TeardownHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Register a teardown hook from within the test.
+ * Wait for the test executor to call done method.
  */
-export function Teardown(handler: TeardownHandler<Context>): MethodDecorator {
+export function WaitForDone(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.teardown`, handler)
+    tests.set(`${property}.waitForDone`, true)
   }
 }

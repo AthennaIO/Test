@@ -9,21 +9,20 @@
 
 import 'reflect-metadata'
 
-import type { Context, SetupHandler } from '#src/types'
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Register a setup hook from within the test.
+ * Skip the test conditionally.
  */
-export function Setup(handler: SetupHandler<Context>): MethodDecorator {
+export function Skip(reason?: string): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.setup`, handler)
+    tests.set(`${property}.skip`, reason || true)
   }
 }

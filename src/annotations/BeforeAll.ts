@@ -9,7 +9,7 @@
 
 import 'reflect-metadata'
 
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
  * Create a new before all (setup) hook.
@@ -18,7 +18,7 @@ export function BeforeAll(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const beforeAllHooks = Reflect.getMetadata('hooks:beforeAll', Target)
 

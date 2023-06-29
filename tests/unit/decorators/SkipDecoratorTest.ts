@@ -10,8 +10,8 @@
 import { test, Test, Skip } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('SkipDecoratorTest', () => {
-  test('should be able to register tests of some class using test and skip decorator', async ({ assert }) => {
+test.group('SkipAnnotationTest', () => {
+  test('should be able to register tests of some class using test and skip annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Skip()
@@ -27,7 +27,7 @@ test.group('SkipDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the skip decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the skip annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Skip()
       public async thisWillBeIgnored() {}

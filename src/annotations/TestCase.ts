@@ -10,19 +10,23 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Pin the test. If one test is pinned, Japa will run only pinned tests.
+ * Define the dataset for the test case. The test executor will be invoked
+ * for all the items inside the dataset array.
  */
-export function Pin(): MethodDecorator {
+export function TestCase(value: any): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
+    const cases = tests.get(`${property}.with`, [])
 
-    tests.set(`${property}.pin`, true)
+    cases.push(value)
+
+    tests.set(`${property}.with`, cases)
   }
 }

@@ -7,8 +7,15 @@
  * file that was distributed with this source code.
  */
 
+import {
+  Importer,
+  run,
+  assert,
+  configure,
+  specReporter,
+  processCliArgs,
+} from '#src'
 import type { Config, PluginFn } from '#src/types'
-import { run, configure, processCliArgs, Importer } from '#src'
 
 export class Runner {
   public static files: string[] = []
@@ -63,6 +70,28 @@ export class Runner {
     this.reporters.push(reporter)
 
     return this
+  }
+
+  /**
+   * Add the `assert()` plugin.
+   *
+   * @example ```ts
+   * Runner.addAssertPlugin()
+   * ```
+   */
+  public static addAssertPlugin(): typeof Runner {
+    return this.addPlugin(assert())
+  }
+
+  /**
+   * Add the `specReporter()` plugin.
+   *
+   * @example ```ts
+   * Runner.addSpecReporter()
+   * ```
+   */
+  public static addSpecReporter(): typeof Runner {
+    return this.addReporter(specReporter())
   }
 
   /**
@@ -128,6 +157,21 @@ export class Runner {
    */
   public static setTsEnv(): typeof Runner {
     process.env.IS_TS = 'true'
+
+    return this
+  }
+
+  /**
+   * Set the `NODE_ENV` and `APP_ENV` environments.
+   *
+   * @example ```ts
+   * Runner.setNodeEnv()
+   * Runner.setNodeEnv('test')
+   * ```
+   */
+  public static setNodeEnv(env = 'test'): typeof Runner {
+    process.env.APP_ENV = env
+    process.env.NODE_ENV = env
 
     return this
   }

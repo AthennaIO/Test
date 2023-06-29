@@ -10,8 +10,8 @@
 import { test, BeforeEach } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('BeforeEachDecoratorTest', () => {
-  test('should be able to register before each hook of some class using before each decorator', async ({ assert }) => {
+test.group('BeforeEachAnnotationTest', () => {
+  test('should be able to register before each hook of some class using before each annotation', async ({ assert }) => {
     class MyClass {
       @BeforeEach()
       public async beforeEach() {}

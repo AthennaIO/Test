@@ -12,8 +12,8 @@ import { ObjectBuilder } from '@athenna/common'
 
 function cleanup() {}
 
-test.group('CleanupDecoratorTest', () => {
-  test('should be able to register tests of some class using test and cleanup decorator', async ({ assert }) => {
+test.group('CleanupAnnotationTest', () => {
+  test('should be able to register tests of some class using test and cleanup annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @Cleanup(cleanup)
@@ -29,7 +29,7 @@ test.group('CleanupDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the cleanup decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the cleanup annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @Cleanup(cleanup)
       public async thisWillBeIgnored() {}

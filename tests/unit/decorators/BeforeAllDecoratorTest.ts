@@ -10,8 +10,8 @@
 import { test, BeforeAll } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('BeforeAllDecoratorTest', () => {
-  test('should be able to register before all hook of some class using before all decorator', async ({ assert }) => {
+test.group('BeforeAllAnnotationTest', () => {
+  test('should be able to register before all hook of some class using before all annotation', async ({ assert }) => {
     class MyClass {
       @BeforeAll()
       public async beforeAll() {}

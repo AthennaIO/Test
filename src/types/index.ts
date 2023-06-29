@@ -10,7 +10,7 @@
 export type { Config, PluginFn } from '@japa/runner'
 
 export * from '#src/types/Context'
-export * from '#src/types/Options'
+export * from '#src/types/TestOptions'
 export * from '#src/types/SetupHandler'
 export * from '#src/types/CleanupHandler'
 export * from '#src/types/TeardownHandler'

@@ -10,8 +10,8 @@
 import { test, Test, TestCase } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('TestCaseDecoratorTest', () => {
-  test('should be able to register tests of some class using test and test case decorator', async ({ assert }) => {
+test.group('TestCaseAnnotationTest', () => {
+  test('should be able to register tests of some class using test and test case annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       @TestCase('lenon@athenna.io')
@@ -27,7 +27,7 @@ test.group('TestCaseDecoratorTest', () => {
     })
   })
 
-  test('should be able to register the test case decorator without the test decorator', async ({ assert }) => {
+  test('should be able to register the test case annotation without the test annotation', async ({ assert }) => {
     class MyClass {
       @TestCase('lenon@athenna.io')
       public async thisWillBeIgnored() {}

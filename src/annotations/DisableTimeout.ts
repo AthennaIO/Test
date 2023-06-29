@@ -10,23 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Define the dataset for the test case. The test executor will be invoked
- * for all the items inside the dataset array.
+ * Disable test timeout. It is the same as calling `test.timeout(0)`
  */
-export function TestCase(value: any): MethodDecorator {
+export function DisableTimeout(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
-    const cases = tests.get(`${property}.with`, [])
 
-    cases.push(value)
-
-    tests.set(`${property}.with`, cases)
+    tests.set(`${property}.disableTimeout`, true)
   }
 }

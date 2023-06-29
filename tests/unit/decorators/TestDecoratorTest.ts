@@ -10,8 +10,8 @@
 import { test, Test } from '#src'
 import { ObjectBuilder } from '@athenna/common'
 
-test.group('TestDecoratorTest', () => {
-  test('should be able to register tests of some class using test decorator', async ({ assert }) => {
+test.group('TestAnnotationTest', () => {
+  test('should be able to register tests of some class using test annotation', async ({ assert }) => {
     class MyClass {
       @Test()
       public async shouldBeAbleToRun() {}

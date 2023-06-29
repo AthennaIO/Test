@@ -10,19 +10,20 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
+import type { Context, CleanupHandler } from '#src/types'
 
 /**
- * Wait for the test executor to call done method.
+ * Register a cleanup hook from within the test.
  */
-export function WaitForDone(): MethodDecorator {
+export function Cleanup(handler: CleanupHandler<Context>): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.waitForDone`, true)
+    tests.set(`${property}.cleanup`, handler)
   }
 }

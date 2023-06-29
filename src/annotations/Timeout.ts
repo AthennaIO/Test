@@ -10,19 +10,19 @@
 import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
-import { Decorator } from '#src/helpers/Decorator'
+import { Annotation } from '#src/helpers/Annotation'
 
 /**
- * Create a new test.
+ * Set the test timeout.
  */
-export function Test(title?: string): MethodDecorator {
+export function Timeout(timeout: number): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Decorator.defineDefaultMetadata(Target)
+    Annotation.defineDefaultMetadata(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 
-    tests.set(`${property}.title`, title || property)
+    tests.set(`${property}.timeout`, timeout)
   }
 }
