@@ -23,6 +23,8 @@ export {
   runFailedTests,
 }
 
+export * from '#src/types'
+
 export * from '#src/globals/Assert'
 export * from '#src/globals/Context'
 

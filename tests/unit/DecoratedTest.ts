@@ -7,8 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import type { Context } from '#src/types'
-
 import {
   TestCase,
   Test,
@@ -22,6 +20,7 @@ import {
   Setup,
   BeforeAll,
   BeforeEach,
+  type Context,
 } from '#src'
 
 let SETUP_EXECUTED = false
