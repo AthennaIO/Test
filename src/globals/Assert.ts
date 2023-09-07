@@ -16,12 +16,12 @@ declare module '@japa/assert' {
     rejects(
       fn: () => any | Promise<any>,
       errType: any,
-      message?: string,
+      message?: string
     ): Promise<any>
     doesNotRejects(
       fn: () => any | Promise<any>,
       errType: any,
-      message?: string,
+      message?: string
     ): Promise<any>
   }
 }

@@ -20,7 +20,7 @@ import {
   Setup,
   BeforeAll,
   BeforeEach,
-  type Context,
+  type Context
 } from '#src'
 
 let SETUP_EXECUTED = false

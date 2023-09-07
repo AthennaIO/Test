@@ -23,7 +23,7 @@ test.group('WaitForDoneAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      waitForDone: true,
+      waitForDone: true
     })
   })
 
@@ -36,7 +36,7 @@ test.group('WaitForDoneAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      waitForDone: true,
+      waitForDone: true
     })
   })
 

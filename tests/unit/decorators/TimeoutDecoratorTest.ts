@@ -23,7 +23,7 @@ test.group('TimeoutAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      timeout: 10000,
+      timeout: 10000
     })
   })
 
@@ -36,7 +36,7 @@ test.group('TimeoutAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      timeout: 10000,
+      timeout: 10000
     })
   })
 

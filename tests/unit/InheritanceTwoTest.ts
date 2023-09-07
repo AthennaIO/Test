@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { BaseTest } from '#tests/stubs/BaseTest'
+import { BaseTest } from '#tests/fixtures/BaseTest'
 import { Test, AfterAll, AfterEach, BeforeAll, BeforeEach, type Context } from '#src'
 
 export default class InheritanceTwoTest extends BaseTest {

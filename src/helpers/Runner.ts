@@ -13,7 +13,7 @@ import {
   assert,
   configure,
   specReporter,
-  processCliArgs,
+  processCliArgs
 } from '#src'
 import type { Config, PluginFn } from '#src/types'
 
@@ -191,7 +191,7 @@ export class Runner {
       reporters: this.reporters,
       forceExit: this.forceExit,
       timeout: this.globalTimeout,
-      ...processCliArgs(this.cliArgs),
+      ...processCliArgs(this.cliArgs)
     })
 
     return run()

@@ -27,7 +27,7 @@ export class AfterEachHookException extends Exception {
       code: 'E_AFTER_EACH_HOOK',
       message: error.message,
       help: error.help,
-      stack: error.stack,
+      stack: error.stack
     })
   }
 }

@@ -12,7 +12,7 @@ import { ObjectBuilder } from '@athenna/common'
 
 test.group('DisableTimeoutAnnotationTest', () => {
   test('should be able to register tests of some class using test and disable timeout annotation', async ({
-    assert,
+    assert
   }) => {
     class MyClass {
       @Test()
@@ -25,7 +25,7 @@ test.group('DisableTimeoutAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      disableTimeout: true,
+      disableTimeout: true
     })
   })
 
@@ -38,7 +38,7 @@ test.group('DisableTimeoutAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      disableTimeout: true,
+      disableTimeout: true
     })
   })
 

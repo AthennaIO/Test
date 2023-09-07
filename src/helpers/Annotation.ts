@@ -18,7 +18,7 @@ export class Annotation {
       Reflect.defineMetadata(
         'tests',
         new ObjectBuilder({ referencedValues: true }),
-        target,
+        target
       )
     }
 
