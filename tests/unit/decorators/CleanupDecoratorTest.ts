@@ -25,7 +25,7 @@ test.group('CleanupAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      cleanup,
+      cleanup
     })
   })
 
@@ -38,7 +38,7 @@ test.group('CleanupAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      cleanup,
+      cleanup
     })
   })
 

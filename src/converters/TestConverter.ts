@@ -113,7 +113,7 @@ export class TestConverter {
       const hookHandler = this.handleHook(
         method,
         closure,
-        BeforeAllHookException,
+        BeforeAllHookException
       )
 
       group.setup(hookHandler)
@@ -138,7 +138,7 @@ export class TestConverter {
       const hookHandler = this.handleHook(
         method,
         closure,
-        BeforeEachHookException,
+        BeforeEachHookException
       )
 
       group.each.setup(hookHandler)
@@ -163,7 +163,7 @@ export class TestConverter {
       const hookHandler = this.handleHook(
         method,
         closure,
-        AfterAllHookException,
+        AfterAllHookException
       )
 
       group.teardown(hookHandler)
@@ -188,7 +188,7 @@ export class TestConverter {
       const hookHandler = this.handleHook(
         method,
         closure,
-        AfterEachHookException,
+        AfterEachHookException
       )
 
       group.each.teardown(hookHandler)
@@ -221,7 +221,7 @@ export class TestConverter {
       annotation,
       method,
       method,
-      this.className,
+      this.className
     )
   }
 }

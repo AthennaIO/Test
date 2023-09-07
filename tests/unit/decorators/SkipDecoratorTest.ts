@@ -23,7 +23,7 @@ test.group('SkipAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      skip: true,
+      skip: true
     })
   })
 
@@ -36,7 +36,7 @@ test.group('SkipAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      skip: true,
+      skip: true
     })
   })
 

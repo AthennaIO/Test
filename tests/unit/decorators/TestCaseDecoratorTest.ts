@@ -23,7 +23,7 @@ test.group('TestCaseAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      with: ['lenon@athenna.io'],
+      with: ['lenon@athenna.io']
     })
   })
 
@@ -36,7 +36,7 @@ test.group('TestCaseAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      with: ['lenon@athenna.io'],
+      with: ['lenon@athenna.io']
     })
   })
 
@@ -51,7 +51,7 @@ test.group('TestCaseAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      with: [['lenon@athenna.io', 'txsoura@athenna.io'], 'txsoura@athenna.io', 'lenon@athenna.io'],
+      with: [['lenon@athenna.io', 'txsoura@athenna.io'], 'txsoura@athenna.io', 'lenon@athenna.io']
     })
   })
 

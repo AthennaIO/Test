@@ -23,7 +23,7 @@ test.group('RetryAnnotationTest', () => {
     assert.equal(Object.keys(tests.get()).length, 1)
     assert.deepEqual(tests.get('shouldBeAbleToRun'), {
       title: 'shouldBeAbleToRun',
-      retry: 2,
+      retry: 2
     })
   })
 
@@ -36,7 +36,7 @@ test.group('RetryAnnotationTest', () => {
     const tests = Reflect.getMetadata('tests', MyClass)
 
     assert.deepEqual(tests.get('thisWillBeIgnored'), {
-      retry: 2,
+      retry: 2
     })
   })
 

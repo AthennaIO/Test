@@ -20,7 +20,7 @@ export {
   configure,
   processCliArgs,
   specReporter,
-  runFailedTests,
+  runFailedTests
 }
 
 export * from './types/index.js'

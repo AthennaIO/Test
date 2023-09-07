@@ -25,7 +25,7 @@ export class Importer {
       debug(
         'Skipping class registration of %s file. There is no class being exported at %s path.',
         fileName,
-        filePath,
+        filePath
       )
 
       return
