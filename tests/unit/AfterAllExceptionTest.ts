@@ -8,12 +8,14 @@
  */
 
 import { Exception } from '@athenna/common'
-import { Test, BeforeAll, ExitFaker, AfterAll, type Context } from '#src'
+import { Test, Mock, BeforeAll, AfterAll, type Context, type Stub } from '#src'
 
 export default class AfterAllExceptionTest {
+  public processExit: Stub
+
   @BeforeAll()
   public async beforeAll() {
-    ExitFaker.fake()
+    this.processExit = Mock.when(process, 'exit').return(undefined)
   }
 
   @AfterAll()
@@ -27,8 +29,8 @@ export default class AfterAllExceptionTest {
   }
 
   @AfterAll()
-  public async releaseExitFaker() {
-    ExitFaker.release()
+  public async restoreMock() {
+    this.processExit.restore()
   }
 
   @Test()

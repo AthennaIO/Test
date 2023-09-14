@@ -11,7 +11,7 @@ import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
-import type { Context, CleanupHandler } from '#src/types'
+import type { Context, CleanupHandler } from '#src'
 
 /**
  * Register a cleanup hook from within the test.
