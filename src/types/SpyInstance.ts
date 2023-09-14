@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { SpyMethod } from '#src/types/SpyMethod'
+import type { SpyMethod } from '#src'
 
 export type SpyInstance<T> = {
   [P in keyof T]: SpyMethod<T[P]>

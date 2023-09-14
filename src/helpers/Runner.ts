@@ -15,7 +15,7 @@ import {
   specReporter,
   processCliArgs
 } from '#src'
-import type { Config, PluginFn } from '#src/types'
+import type { Config, PluginFn } from '#src'
 
 export class Runner {
   public static files: string[] = []

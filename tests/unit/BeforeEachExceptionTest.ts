@@ -8,12 +8,14 @@
  */
 
 import { Exception } from '@athenna/common'
-import { Test, BeforeEach, ExitFaker, AfterAll, BeforeAll, type Context } from '#src'
+import { Test, Mock, BeforeEach, AfterAll, BeforeAll, type Stub, type Context } from '#src'
 
 export default class BeforeEachExceptionTest {
+  public processExit: Stub
+
   @BeforeAll()
   public async beforeAll() {
-    ExitFaker.fake()
+    this.processExit = Mock.when(process, 'exit').return(undefined)
   }
 
   @BeforeEach()
@@ -27,13 +29,13 @@ export default class BeforeEachExceptionTest {
   }
 
   @AfterAll()
-  public async afterAll() {
-    ExitFaker.release()
+  public async restoreMock() {
+    this.processExit.restore()
   }
 
   @Test()
   public async shouldLogAnExceptionWhenBeforeEachHookFails({ assert }: Context) {
-    assert.isTrue(ExitFaker.faker.calledTwice)
-    assert.isTrue(ExitFaker.faker.calledWith(1))
+    assert.isTrue(this.processExit.calledTwice)
+    assert.isTrue(this.processExit.calledWith(1))
   }
 }

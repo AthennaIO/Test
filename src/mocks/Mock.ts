@@ -9,9 +9,7 @@
 
 import { createSandbox } from 'sinon'
 import { MockBuilder } from '#src/mocks/MockBuilder'
-import type { StubMethod } from '#src/types/StubMethod'
-import type { SpyMethod, SpyInstance } from '#src/types'
-import type { StubInstance } from '#src/types/StubInstance'
+import type { StubMethod, SpyMethod, SpyInstance, StubInstance } from '#src'
 
 export class Mock {
   /**

@@ -11,7 +11,7 @@ import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
-import type { Context, SetupHandler } from '#src/types'
+import type { Context, SetupHandler } from '#src'
 
 /**
  * Register a setup hook from within the test.

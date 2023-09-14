@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { StubMethod } from '#src/types/StubMethod'
+import type { StubMethod } from '#src'
 
 export type StubInstance<T> = {
   [P in keyof T]: StubMethod<T[P]>

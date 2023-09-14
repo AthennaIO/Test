@@ -11,7 +11,7 @@ import 'reflect-metadata'
 
 import { ObjectBuilder } from '@athenna/common'
 import { Annotation } from '#src/helpers/Annotation'
-import type { Context, TeardownHandler } from '#src/types'
+import type { Context, TeardownHandler } from '#src'
 
 /**
  * Register a teardown hook from within the test.

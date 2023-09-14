@@ -30,7 +30,6 @@ export * from '#src/globals/Context'
 
 export * from '#src/helpers/Runner'
 export * from '#src/helpers/Importer'
-export * from '#src/helpers/ExitFaker'
 export * from '#src/mocks/Mock'
 export * from '#src/mocks/MockBuilder'
 export * from '#src/annotations/AfterAll'

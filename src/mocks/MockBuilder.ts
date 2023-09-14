@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { Stub } from '#src/types'
+import type { Stub } from '#src'
 import type { SinonSandbox } from 'sinon'
 import type { Exception } from '@athenna/common'
 
