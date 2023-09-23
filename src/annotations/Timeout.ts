@@ -19,7 +19,7 @@ export function Timeout(timeout: number): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Annotation.defineDefaultMetadata(Target)
+    Annotation.defineMeta(Target)
 
     const tests: ObjectBuilder = Reflect.getMetadata('tests', Target)
 

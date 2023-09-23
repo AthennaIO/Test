@@ -62,7 +62,7 @@ export class TestConverter {
       const options: TestOptions = tests.get(method)
 
       if (!closure) {
-        this.debugClosure('@Test', method)
+        this.debugClosure('@Test()', method)
 
         return
       }
@@ -105,7 +105,7 @@ export class TestConverter {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
-        this.debugClosure('@BeforeAll', method)
+        this.debugClosure('@BeforeAll()', method)
 
         return
       }
@@ -130,7 +130,7 @@ export class TestConverter {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
-        this.debugClosure('@BeforeEach', method)
+        this.debugClosure('@BeforeEach()', method)
 
         return
       }
@@ -155,7 +155,7 @@ export class TestConverter {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
-        this.debugClosure('@AfterAll', method)
+        this.debugClosure('@AfterAll()', method)
 
         return
       }
@@ -180,7 +180,7 @@ export class TestConverter {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
-        this.debugClosure('@AfterEach', method)
+        this.debugClosure('@AfterEach()', method)
 
         return
       }
@@ -217,9 +217,8 @@ export class TestConverter {
    */
   private debugClosure(annotation: string, method: string) {
     debug(
-      'Skipping registration of %s annotation for %s method. There is no method called %s in %s class.',
+      'Skipping registration of %s annotation for %s method. The method does not exist in %s class.',
       annotation,
-      method,
       method,
       this.className
     )

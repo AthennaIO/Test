@@ -18,7 +18,7 @@ export function BeforeEach(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Annotation.defineDefaultMetadata(Target)
+    Annotation.defineMeta(Target)
 
     const beforeEachHooks = Reflect.getMetadata('hooks:beforeEach', Target)
 

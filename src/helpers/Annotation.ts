@@ -13,7 +13,7 @@ export class Annotation {
   /**
    * Define default metadata values in target.
    */
-  public static defineDefaultMetadata(target: any): typeof Annotation {
+  public static defineMeta(target: any): typeof Annotation {
     if (!Reflect.hasMetadata('tests', target)) {
       Reflect.defineMetadata(
         'tests',
