@@ -18,7 +18,7 @@ export function AfterEach(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Annotation.defineDefaultMetadata(Target)
+    Annotation.defineMeta(Target)
 
     const afterEachHooks = Reflect.getMetadata('hooks:afterEach', Target)
 

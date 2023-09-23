@@ -20,11 +20,6 @@ export default class MockTest {
     await userService.findById(1)
 
     assert.calledWith(spy.findById, 1)
-    await assert.resolved(spy.findById, {
-      id: 1,
-      name: 'João Lenon',
-      email: 'lenon@athenna.io'
-    })
   }
 
   @Test()
@@ -44,11 +39,6 @@ export default class MockTest {
     await userService.findById(1)
 
     assert.calledWith(stub.findById, 1)
-    await assert.resolved(stub.findById, {
-      id: 1,
-      name: 'Victor Tesoura',
-      email: 'txsoura@athenna.io'
-    })
   }
 
   @Test()
@@ -60,11 +50,6 @@ export default class MockTest {
     await userService.findById(1)
 
     assert.calledWith(spy, 1)
-    await assert.resolved(spy, {
-      id: 1,
-      name: 'João Lenon',
-      email: 'lenon@athenna.io'
-    })
   }
 
   @Test()
@@ -76,7 +61,6 @@ export default class MockTest {
     userService.findById(1)
 
     assert.calledWith(mock, 1)
-    assert.returned(mock, { id: 2 })
   }
 
   @Test()
@@ -88,29 +72,38 @@ export default class MockTest {
     await userService.findById(1)
 
     assert.calledWith(mock, 1)
-    await assert.resolved(mock, { id: 2 })
   }
 
   @Test()
   public async shouldBeAbleToMockObjectMethodsToThrowValue({ assert }: Context) {
     const userService = new UserService()
 
-    const mock = Mock.when(userService, 'findById').throw(new Error('ERROR_MOCK'))
+    Mock.when(userService, 'findById').throw(new Error('ERROR_MOCK'))
 
     assert.throws(() => userService.findById(1), Error)
-
-    assert.threw(mock)
-    assert.threw(mock, 'Error')
   }
 
   @Test()
   public async shouldBeAbleToMockObjectMethodsToRejectAValue({ assert }: Context) {
     const userService = new UserService()
 
-    const mock = Mock.when(userService, 'findById').reject(new Error('ERROR_MOCK'))
+    Mock.when(userService, 'findById').reject(new Error('ERROR_MOCK'))
 
     await assert.rejects(() => userService.findById(1), Error)
-    await assert.rejected(mock, Error)
+  }
+
+  @Test()
+  public async shouldBeAbleToCreateFakeFunctionsToBeUsedAsSpies({ assert }: Context) {
+    const userService = new UserService()
+
+    const fake = Mock.fake()
+    Mock.when(userService, 'findSync').return([{ id: fake }])
+
+    const idFakeFn = userService.findSync()[0].id as any
+
+    idFakeFn()
+
+    assert.called(fake)
   }
 
   @Test()

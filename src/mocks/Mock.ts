@@ -9,7 +9,13 @@
 
 import { createSandbox } from 'sinon'
 import { MockBuilder } from '#src/mocks/MockBuilder'
-import type { StubMethod, SpyMethod, SpyInstance, StubInstance } from '#src'
+import type {
+  Spy,
+  SpyMethod,
+  StubMethod,
+  SpyInstance,
+  StubInstance
+} from '#src'
 
 export class Mock {
   /**
@@ -54,6 +60,13 @@ export class Mock {
 
   public static stub<T = any>(object: T, method?: keyof T) {
     return Mock.sandbox.stub(object, method)
+  }
+
+  /**
+   * Create a fake function to be used as a spy.
+   */
+  public static fake(): Spy {
+    return Mock.sandbox.fake()
   }
 
   /**

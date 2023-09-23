@@ -23,6 +23,15 @@ export default class AssertMockTest {
   }
 
   @Test()
+  public async shouldBeAbleToAssertSpyWasNotCalled({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    assert.notCalled(spy)
+  }
+
+  @Test()
   public async shouldBeAbleToAssertSpyWasCalledOnce({ assert }: Context) {
     const userService = new UserService()
 
@@ -58,6 +67,18 @@ export default class AssertMockTest {
   }
 
   @Test()
+  public async shouldBeAbleToAssertSpyWasCalledNotWithArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.calledWith(spy, 1)
+    assert.notCalledWith(spy, 2)
+  }
+
+  @Test()
   @Fails()
   public async shouldFailWhenAssertingThatSpyWasNotCalledWithArgs({ assert }: Context) {
     const userService = new UserService()
@@ -67,6 +88,18 @@ export default class AssertMockTest {
     await userService.findById(1)
 
     assert.calledWith(spy, 2)
+  }
+
+  @Test()
+  @Fails()
+  public async shouldFailWhenAssertingThatSpyWasCalledWithArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.notCalledWith(spy, 1)
   }
 
   @Test()
@@ -133,6 +166,19 @@ export default class AssertMockTest {
   }
 
   @Test()
+  public async shouldBeAbleToAssertOtherSpyWasNotCalledBefore({ assert }: Context) {
+    const userService = new UserService()
+
+    const spyFind = Mock.spy(userService, 'find')
+    const spyFindSync = Mock.spy(userService, 'findSync')
+
+    await userService.find()
+    userService.findSync()
+
+    assert.notCalledBefore(spyFindSync, spyFind)
+  }
+
+  @Test()
   public async shouldBeAbleToAssertOtherSpyWasCalledAfter({ assert }: Context) {
     const userService = new UserService()
 
@@ -145,114 +191,14 @@ export default class AssertMockTest {
   }
 
   @Test()
-  public async shouldBeAbleToAssertThatSpyHasReturnedAValue({ assert }: Context) {
+  public async shouldBeAbleToAssertOtherSpyWasNotCalledAfter({ assert }: Context) {
     const userService = new UserService()
 
-    const spy = Mock.spy(userService, 'findSync')
+    const spyFind = Mock.spy(userService, 'find')
+    const spyFindById = Mock.spy(userService, 'findById')
 
-    userService.findSync()
+    await userService.findById(1)
 
-    assert.returned(spy, [
-      {
-        id: 1,
-        name: 'João Lenon',
-        email: 'lenon@athenna.io'
-      }
-    ])
-  }
-
-  @Test()
-  @Fails()
-  public async shouldFailWhenSpyHasNotReturnedTheGivenValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'findSync')
-
-    userService.findSync()
-
-    assert.returned(spy, [
-      {
-        id: 2,
-        name: 'João Lenon',
-        email: 'lenon@athenna.io'
-      }
-    ])
-  }
-
-  @Test()
-  public async shouldBeAbleToAssertThatSpyHasResolvedAValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'find')
-
-    await userService.find()
-
-    await assert.resolved(spy, [
-      {
-        id: 1,
-        name: 'João Lenon',
-        email: 'lenon@athenna.io'
-      }
-    ])
-  }
-
-  @Test()
-  @Fails()
-  public async shouldFailWhenSpyHasNotResolvedTheGivenValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'findSync')
-
-    userService.findSync()
-
-    await assert.resolved(spy, [
-      {
-        id: 2,
-        name: 'João Lenon',
-        email: 'lenon@athenna.io'
-      }
-    ])
-  }
-
-  @Test()
-  public async shouldBeAbleToAssertThatSpyHasThrewAValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'throw')
-
-    assert.throws(() => userService.throw(), 'User not found')
-    assert.threw(spy, 'Error')
-  }
-
-  @Test()
-  @Fails()
-  public async shouldFailWhenSpyHasNotThrewTheGivenValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'throw')
-
-    assert.throws(() => userService.throw(), 'User not found')
-    assert.threw(spy, 'OtherError')
-  }
-
-  @Test()
-  public async shouldBeAbleToAssertThatSpyHasRejectedAValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'reject')
-
-    await assert.rejects(() => userService.reject(), 'User not found')
-    await assert.rejected(spy, 'User not found')
-  }
-
-  @Test()
-  @Fails()
-  public async shouldFailWhenSpyHasNotRejectedTheGivenValue({ assert }: Context) {
-    const userService = new UserService()
-
-    const spy = Mock.spy(userService, 'reject')
-
-    await assert.rejects(() => userService.reject(), 'User not found')
-    await assert.rejected(spy, 'OtherError')
+    assert.notCalledAfter(spyFindById, spyFind)
   }
 }

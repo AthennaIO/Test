@@ -18,7 +18,7 @@ export function BeforeAll(): MethodDecorator {
   return (target: any, property: string, _: any) => {
     const Target = target.constructor
 
-    Annotation.defineDefaultMetadata(Target)
+    Annotation.defineMeta(Target)
 
     const beforeAllHooks = Reflect.getMetadata('hooks:beforeAll', Target)
 

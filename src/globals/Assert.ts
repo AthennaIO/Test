@@ -52,38 +52,49 @@ Assert.macro('calledAfter', function (mock: SinonSpy, afterMock: SinonSpy) {
   return this.isTrue(mock.calledAfter(afterMock))
 })
 
-Assert.macro('returned', function (mock: SinonSpy, value: any) {
-  const hasReturned = mock.returned(value)
-
-  if (!hasReturned) {
-    return this.deepEqual(mock.returnValues[0], value)
-  }
-
-  return this.isTrue(hasReturned)
+Assert.macro('notCalled', function (mock: SinonSpy) {
+  return this.isTrue(mock.notCalled)
 })
 
-Assert.macro('threw', function (mock: SinonSpy, value?: any) {
-  const hasThrew = mock.threw(value)
+Assert.macro('notCalledWith', function (mock: SinonSpy, ...args: any[]) {
+  const hasCalledWith = mock.calledWith(...args)
 
-  if (!hasThrew) {
-    return this.deepEqual(mock.returnValues[0], value)
+  if (hasCalledWith) {
+    return this.notDeepEqual(mock.args[0], args)
   }
 
-  return this.isTrue(hasThrew)
+  return this.isFalse(hasCalledWith)
 })
 
-Assert.macro('resolved', async function (mock: SinonSpy, value?: any) {
-  const hasResolved = mock.returned(value)
+Assert.macro('calledOnceWith', function (mock: SinonSpy, ...args: any[]) {
+  return this.isTrue(mock.calledOnceWith(...args))
+})
 
-  if (!hasResolved) {
-    return this.deepEqual(await mock.returnValues[0], value)
+Assert.macro(
+  'calledTimesWith',
+  function (mock: SinonSpy, times: number, ...args: any[]) {
+    this.calledTimes(mock, times)
+    this.calledWith(mock, ...args)
   }
+)
 
-  return this.isTrue(hasResolved)
+Assert.macro('calledBefore', function (mock: SinonSpy, beforeMock: SinonSpy) {
+  return this.isTrue(mock.calledBefore(beforeMock))
 })
 
-Assert.macro('rejected', async function (mock: SinonSpy, value?: any) {
-  return this.rejects(() => mock.returnValues[0], value)
+Assert.macro(
+  'notCalledBefore',
+  function (mock: SinonSpy, beforeMock: SinonSpy) {
+    return this.isFalse(mock.calledBefore(beforeMock))
+  }
+)
+
+Assert.macro('calledAfter', function (mock: SinonSpy, afterMock: SinonSpy) {
+  return this.isTrue(mock.calledAfter(afterMock))
+})
+
+Assert.macro('notCalledAfter', function (mock: SinonSpy, afterMock: SinonSpy) {
+  return this.isFalse(mock.calledAfter(afterMock))
 })
 
 export {}
@@ -102,11 +113,14 @@ declare module '@japa/assert' {
       errType: any,
       message?: string
     ): Promise<any>
-    hey(): void
     /**
      * Assert that the given mock was called.
      */
     called(mock: SinonSpy): void
+    /**
+     * Assert that the given mock was not called.
+     */
+    notCalled(mock: SinonSpy): void
     /**
      * Assert that the given mock was called only once.
      */
@@ -121,6 +135,11 @@ declare module '@japa/assert' {
      * determined arguments.
      */
     calledWith(mock: SinonSpy, ...args: any[]): void
+    /**
+     * Assert that the given mock was not called with the
+     * determined arguments.
+     */
+    notCalledWith(mock: SinonSpy, ...args: any[]): void
     /**
      * Assert that the given mock was called only once
      * with the determined arguments.
@@ -138,28 +157,19 @@ declare module '@japa/assert' {
      */
     calledBefore(mock: SinonSpy, beforeMock: SinonSpy): void
     /**
+     * Assert that the given mock was not called before
+     * an other determined mock.
+     */
+    notCalledBefore(mock: SinonSpy, beforeMock: SinonSpy): void
+    /**
      * Assert that the given mock was called after
      * an other determined mock.
      */
     calledAfter(mock: SinonSpy, afterMock: SinonSpy): void
     /**
-     * Assert that the given mock returned a determined value.
+     * Assert that the given mock was not called after
+     * an other determined mock.
      */
-    returned(mock: SinonSpy, value: any): void
-    /**
-     * Assert that the given threw. Could also
-     * assert the value that has been thrown.
-     */
-    threw(mock: SinonSpy, value?: any): void
-    /**
-     * Assert that the given mock resolved. Could also
-     * assert the value that has been returned.
-     */
-    resolved(mock: SinonSpy, value?: any): Promise<void>
-    /**
-     * Assert that the given mock rejected. Could also
-     * assert the value that has been returned.
-     */
-    rejected(mock: SinonSpy, value?: any): Promise<void>
+    notCalledAfter(mock: SinonSpy, afterMock: SinonSpy): void
   }
 }
