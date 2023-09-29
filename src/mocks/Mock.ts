@@ -7,15 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { createSandbox } from 'sinon'
-import { MockBuilder } from '#src/mocks/MockBuilder'
 import type {
   Spy,
+  Match,
   SpyMethod,
   StubMethod,
   SpyInstance,
   StubInstance
 } from '#src'
+import { createSandbox } from 'sinon'
+import { MockBuilder } from '#src/mocks/MockBuilder'
 
 export class Mock {
   /**
@@ -67,6 +68,18 @@ export class Mock {
    */
   public static fake(): Spy {
     return Mock.sandbox.fake()
+  }
+
+  /**
+   * Create a matcher for the given value.
+   *
+   * @example
+   * ```ts
+   * assert.isTrue({ hello: 'world', name: 'João' }, Mock.match({ hello: 'world' }))
+   * ```
+   */
+  public static match(value: any): Match {
+    return Mock.sandbox.match(value)
   }
 
   /**

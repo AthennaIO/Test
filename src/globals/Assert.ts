@@ -44,6 +44,16 @@ Assert.macro(
   }
 )
 
+Assert.macro('calledWithMatch', function (mock: SinonSpy, ...args: any[]) {
+  const hasCalledWithMatch = mock.calledWithMatch(...args)
+
+  if (!hasCalledWithMatch) {
+    return this.deepEqual(mock.args[0], args)
+  }
+
+  return this.isTrue(hasCalledWithMatch)
+})
+
 Assert.macro('calledBefore', function (mock: SinonSpy, beforeMock: SinonSpy) {
   return this.isTrue(mock.calledBefore(beforeMock))
 })
@@ -64,6 +74,16 @@ Assert.macro('notCalledWith', function (mock: SinonSpy, ...args: any[]) {
   }
 
   return this.isFalse(hasCalledWith)
+})
+
+Assert.macro('notCalledWithMatch', function (mock: SinonSpy, ...args: any[]) {
+  const hasCalledWithMatch = mock.calledWithMatch(...args)
+
+  if (hasCalledWithMatch) {
+    return this.notDeepEqual(mock.args[0], args)
+  }
+
+  return this.isFalse(hasCalledWithMatch)
 })
 
 Assert.macro('calledOnceWith', function (mock: SinonSpy, ...args: any[]) {
@@ -140,6 +160,32 @@ declare module '@japa/assert' {
      * determined arguments.
      */
     notCalledWith(mock: SinonSpy, ...args: any[]): void
+    /**
+     * Assert that the given mock was called with the
+     * arguments matching some of the given arguments.
+     * This is the same of doing:
+     * `assert.calledWith(mock, Mock.match(arg1), Mock.match(arg2))`
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.calledWithMatch(console.log, 'hello', 'world') // passes
+     * ```
+     */
+    calledWithMatch(mock: SinonSpy, ...args: any[]): void
+    /**
+     * Assert that the given mock was not called with the
+     * arguments matching some of the given arguments.
+     * This is the same of doing:
+     * `assert.notCalledWith(mock, Mock.match(arg1), Mock.match(arg2))`
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.notCalledWithMatch(console.log, 'hello', 'world') // fails
+     * ```
+     */
+    notCalledWithMatch(mock: SinonSpy, ...args: any[]): void
     /**
      * Assert that the given mock was called only once
      * with the determined arguments.
