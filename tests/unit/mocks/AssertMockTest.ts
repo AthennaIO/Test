@@ -67,6 +67,17 @@ export default class AssertMockTest {
   }
 
   @Test()
+  public async shouldBeAbleToAssertSpyWasCalledWithMatchingArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.calledWithMatch(spy, 1)
+  }
+
+  @Test()
   public async shouldBeAbleToAssertSpyWasCalledNotWithArgs({ assert }: Context) {
     const userService = new UserService()
 
@@ -76,6 +87,18 @@ export default class AssertMockTest {
 
     assert.calledWith(spy, 1)
     assert.notCalledWith(spy, 2)
+  }
+
+  @Test()
+  public async shouldBeAbleToAssertSpyWasCalledNotWithMatchingArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.calledWithMatch(spy, 1)
+    assert.notCalledWithMatch(spy, 2)
   }
 
   @Test()
@@ -92,6 +115,18 @@ export default class AssertMockTest {
 
   @Test()
   @Fails()
+  public async shouldFailWhenAssertingThatSpyWasNotCalledWithMatchingArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.calledWithMatch(spy, 2)
+  }
+
+  @Test()
+  @Fails()
   public async shouldFailWhenAssertingThatSpyWasCalledWithArgs({ assert }: Context) {
     const userService = new UserService()
 
@@ -100,6 +135,18 @@ export default class AssertMockTest {
     await userService.findById(1)
 
     assert.notCalledWith(spy, 1)
+  }
+
+  @Test()
+  @Fails()
+  public async shouldFailWhenAssertingThatSpyWasCalledWithMatchingArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    const spy = Mock.spy(userService, 'findById')
+
+    await userService.findById(1)
+
+    assert.notCalledWithMatch(spy, 1)
   }
 
   @Test()

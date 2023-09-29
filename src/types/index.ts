@@ -10,6 +10,7 @@
 export type { Config, PluginFn } from '@japa/runner'
 
 export * from './Spy.js'
+export * from './Match.js'
 export * from './SpyMethod.js'
 export * from './SpyInstance.js'
 export * from './Stub.js'
