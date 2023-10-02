@@ -136,30 +136,30 @@ declare module '@japa/assert' {
     /**
      * Assert that the given mock was called.
      */
-    called(mock: SinonSpy): void
+    called(mock: any): void
     /**
      * Assert that the given mock was not called.
      */
-    notCalled(mock: SinonSpy): void
+    notCalled(mock: any): void
     /**
      * Assert that the given mock was called only once.
      */
-    calledOnce(mock: SinonSpy): void
+    calledOnce(mock: any): void
     /**
      * Assert that the given mock was called the
      * determined number of times.
      */
-    calledTimes(mock: SinonSpy, times: number): void
+    calledTimes(mock: any, times: number): void
     /**
      * Assert that the given mock was called with the
      * determined arguments.
      */
-    calledWith(mock: SinonSpy, ...args: any[]): void
+    calledWith(mock: any, ...args: any[]): void
     /**
      * Assert that the given mock was not called with the
      * determined arguments.
      */
-    notCalledWith(mock: SinonSpy, ...args: any[]): void
+    notCalledWith(mock: any, ...args: any[]): void
     /**
      * Assert that the given mock was called with the
      * arguments matching some of the given arguments.
@@ -172,7 +172,7 @@ declare module '@japa/assert' {
      * assert.calledWithMatch(console.log, 'hello', 'world') // passes
      * ```
      */
-    calledWithMatch(mock: SinonSpy, ...args: any[]): void
+    calledWithMatch(mock: any, ...args: any[]): void
     /**
      * Assert that the given mock was not called with the
      * arguments matching some of the given arguments.
@@ -185,37 +185,37 @@ declare module '@japa/assert' {
      * assert.notCalledWithMatch(console.log, 'hello', 'world') // fails
      * ```
      */
-    notCalledWithMatch(mock: SinonSpy, ...args: any[]): void
+    notCalledWithMatch(mock: any, ...args: any[]): void
     /**
      * Assert that the given mock was called only once
      * with the determined arguments.
      */
-    calledOnceWith(mock: SinonSpy, ...args: any[]): void
+    calledOnceWith(mock: any, ...args: any[]): void
     /**
      * Assert that the given mock was called the
      * determined number of times with always the determined
      * arguments.
      */
-    calledTimesWith(mock: SinonSpy, times: number, ...args: any[]): void
+    calledTimesWith(mock: any, times: number, ...args: any[]): void
     /**
      * Assert that the given mock was called before
      * an other determined mock.
      */
-    calledBefore(mock: SinonSpy, beforeMock: SinonSpy): void
+    calledBefore(mock: any, beforeMock: any): void
     /**
      * Assert that the given mock was not called before
      * an other determined mock.
      */
-    notCalledBefore(mock: SinonSpy, beforeMock: SinonSpy): void
+    notCalledBefore(mock: any, beforeMock: any): void
     /**
      * Assert that the given mock was called after
      * an other determined mock.
      */
-    calledAfter(mock: SinonSpy, afterMock: SinonSpy): void
+    calledAfter(mock: any, afterMock: any): void
     /**
      * Assert that the given mock was not called after
      * an other determined mock.
      */
-    notCalledAfter(mock: SinonSpy, afterMock: SinonSpy): void
+    notCalledAfter(mock: any, afterMock: any): void
   }
 }
