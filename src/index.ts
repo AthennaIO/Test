@@ -23,7 +23,7 @@ export {
   runFailedTests
 }
 
-export * from './types/index.js'
+export * from '#src/types'
 
 export * from '#src/globals/Assert'
 export * from '#src/globals/Context'
