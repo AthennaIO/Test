@@ -19,6 +19,26 @@ export class MockBuilder {
   ) {}
 
   /**
+   * Mock a property changing it value.
+   *
+   * @example
+   * ```ts
+   * import { Mock } from '@athenna/test'
+   *
+   * const mock = Mock.when(console, 'log').value(() => {})
+   *
+   * mock.called // false
+   * ```
+   */
+  public value<T = any>(value: T): Stub {
+    const stub = this.sandbox.stub(this.object, this.method)
+
+    stub.value(value)
+
+    return stub
+  }
+
+  /**
    * Mock the method to return the given value.
    *
    * @example

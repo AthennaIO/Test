@@ -53,6 +53,17 @@ export default class MockTest {
   }
 
   @Test()
+  public async shouldBeAbleToMockObjectPropertyWithDifferentValues({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').value(() => ({ id: 2 }))
+
+    const value = userService.findById(1)
+
+    assert.deepEqual(value, { id: 2 })
+  }
+
+  @Test()
   public async shouldBeAbleToMockObjectMethodsToReturnValue({ assert }: Context) {
     const userService = new UserService()
 
@@ -117,6 +128,44 @@ export default class MockTest {
     await assert.rejects(() => userService.findById(1), Error)
 
     Mock.restoreAll()
+
+    await assert.doesNotRejects(() => userService.find())
+    await assert.doesNotRejects(() => userService.findById(1))
+  }
+
+  @Test()
+  public async shouldBeAbleToRestoreASingleMockedMethod({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'find').reject(new Error('ERROR_MOCK'))
+    Mock.when(userService, 'findById').reject(new Error('ERROR_MOCK'))
+
+    await assert.rejects(() => userService.find(), Error)
+    await assert.rejects(() => userService.findById(1), Error)
+
+    Mock.restore(userService.find)
+    Mock.restore(userService.findById)
+
+    await assert.doesNotRejects(() => userService.find())
+    await assert.doesNotRejects(() => userService.findById(1))
+  }
+
+  @Test()
+  public async shouldBeAbleToRestoreASingleMockedProperty({ assert }: Context) {
+    const userService = new UserService()
+
+    const mockFind = Mock.when(userService, 'find').value(() => {
+      throw new Error('ERROR_MOCK')
+    })
+    const mockFindById = Mock.when(userService, 'findById').value(() => {
+      throw new Error('ERROR_MOCK')
+    })
+
+    await assert.rejects(() => userService.find(), Error)
+    await assert.rejects(() => userService.findById(1), Error)
+
+    Mock.restore(mockFind)
+    Mock.restore(mockFindById)
 
     await assert.doesNotRejects(() => userService.find())
     await assert.doesNotRejects(() => userService.findById(1))
