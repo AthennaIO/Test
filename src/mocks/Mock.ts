@@ -83,6 +83,27 @@ export class Mock {
   }
 
   /**
+   * Restore a mock to default behavior.
+   *
+   * @example
+   *  ```ts
+   * Mock.when(console, 'log').return(undefined)
+   *
+   * Mock.restore(console.log)
+   * ```
+   */
+  public static restore(value: any): void {
+    if (!value.restore) {
+      return
+    }
+
+    value.restore()
+    value.resetHistory()
+    value.resetBehavior()
+    value.reset()
+  }
+
+  /**
    * Restore all mocks to default.
    */
   public static restoreAll(): void {
