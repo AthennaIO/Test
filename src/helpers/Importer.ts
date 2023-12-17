@@ -16,16 +16,16 @@ export class Importer {
   /**
    * Import some japa test file and resolve the that class if exists.
    */
-  public static async import(filePath: string) {
-    const Test = await Module.getFrom(filePath)
+  public static async import(fileUrl: URL) {
+    const Test = await Module.getFrom(fileUrl.href)
 
     if (!Test) {
-      const fileName = parse(filePath).name
+      const fileName = parse(fileUrl.href).name
 
       debug(
-        'Skipping class registration of %s file. There is no class being exported at %s path.',
+        'skipping class registration of %s file. there is no class being exported at %s path.',
         fileName,
-        filePath
+        fileUrl.href
       )
 
       return

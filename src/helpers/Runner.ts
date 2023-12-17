@@ -7,21 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import {
-  Importer,
-  run,
-  assert,
-  configure,
-  specReporter,
-  processCliArgs
-} from '#src'
 import type { Config, PluginFn } from '#src'
+import { Importer, run, assert, configure, processCLIArgs } from '#src'
 
 export class Runner {
   public static files: string[] = []
 
   public static plugins: PluginFn[] = []
-  public static reporters: any[] = []
+  public static reporters: { activated: string[]; list: any[] } = {
+    activated: [],
+    list: []
+  }
 
   public static forceExit = false
   public static globalTimeout = 10000
@@ -66,8 +62,9 @@ export class Runner {
    * Runner.addReporter(specReporter())
    * ```
    */
-  public static addReporter(reporter: any): typeof Runner {
-    this.reporters.push(reporter)
+  public static addReporter(name: string, reporter: any): typeof Runner {
+    this.reporters.activated.push(name)
+    this.reporters.list.push(reporter)
 
     return this
   }
@@ -81,17 +78,6 @@ export class Runner {
    */
   public static addAssertPlugin(): typeof Runner {
     return this.addPlugin(assert())
-  }
-
-  /**
-   * Add the `specReporter()` plugin.
-   *
-   * @example ```ts
-   * Runner.addSpecReporter()
-   * ```
-   */
-  public static addSpecReporter(): typeof Runner {
-    return this.addReporter(specReporter())
   }
 
   /**
@@ -184,15 +170,21 @@ export class Runner {
    * ```
    */
   public static async run(): Promise<void> {
-    configure({
+    processCLIArgs(Runner.cliArgs)
+
+    const configs: any = {
       importer: Importer.import,
       files: this.files,
       plugins: this.plugins,
-      reporters: this.reporters,
       forceExit: this.forceExit,
-      timeout: this.globalTimeout,
-      ...processCliArgs(this.cliArgs)
-    })
+      timeout: this.globalTimeout
+    }
+
+    if (Runner.reporters.list.length) {
+      configs.reporters = Runner.reporters
+    }
+
+    configure(configs)
 
     return run()
   }
