@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "4.14.0",
+  "version": "4.15.0",
   "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -56,17 +56,15 @@
     "#tests": "./tests/index.js"
   },
   "dependencies": {
-    "@japa/assert": "^1.4.1",
-    "@japa/run-failed-tests": "^1.1.0",
-    "@japa/runner": "^2.2.2",
-    "@japa/spec-reporter": "^1.3.3",
+    "@japa/assert": "^2.1.0",
+    "@japa/runner": "^3.1.1",
     "@types/sinon": "^10.0.20",
     "c8": "^8.0.1",
     "sinon": "^15.1.0"
   },
   "devDependencies": {
-    "@athenna/common": "^4.21.0",
-    "@athenna/tsconfig": "^4.9.1",
+    "@athenna/common": "^4.23.0",
+    "@athenna/tsconfig": "^4.12.0",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
     "commitizen": "^4.3.0",

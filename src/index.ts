@@ -8,20 +8,10 @@
  */
 
 import { assert, Assert } from '@japa/assert'
-import { specReporter } from '@japa/spec-reporter'
-import { runFailedTests } from '@japa/run-failed-tests'
-import { run, test, configure, processCliArgs } from '@japa/runner'
+import { spec } from '@japa/runner/reporters'
+import { run, test, configure, processCLIArgs } from '@japa/runner'
 
-export {
-  Assert,
-  run,
-  test,
-  assert,
-  configure,
-  processCliArgs,
-  specReporter,
-  runFailedTests
-}
+export { Assert, run, spec, test, assert, configure, processCLIArgs }
 
 export * from '#src/types'
 
