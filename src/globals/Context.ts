@@ -9,7 +9,7 @@
 
 export {}
 
-declare module '@japa/runner' {
+declare module '@japa/runner/core' {
   interface Context {
     assert: import('@japa/assert').Assert
   }
