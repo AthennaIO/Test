@@ -9,8 +9,8 @@
 
 import { debug } from '#src/debug'
 import { test as japaTest } from '#src'
-import type { Group } from '@japa/runner'
 import type { TestOptions } from '#src'
+import type { Group } from '@japa/runner/core'
 import { Is, ObjectBuilder, Options } from '@athenna/common'
 import { AfterAllHookException } from '#src/exceptions/AfterAllHookException'
 import { BeforeAllHookException } from '#src/exceptions/BeforeAllHookException'

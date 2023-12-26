@@ -7,6 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import type { TestContext } from '@japa/runner'
+import type { TestContext } from '@japa/runner/core'
 
 export type Context = TestContext
