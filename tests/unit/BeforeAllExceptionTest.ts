@@ -15,7 +15,7 @@ export default class BeforeAllExceptionTest {
 
   @BeforeAll()
   public async beforeAll() {
-    this.processExit = Mock.when(process, 'exit').return(undefined)
+    this.processExit = Mock.when(process, 'exit').return(undefined).get()
   }
 
   @BeforeAll()

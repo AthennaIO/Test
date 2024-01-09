@@ -122,44 +122,87 @@ export {}
 declare module '@japa/assert' {
   export interface Assert {
     throws(fn: () => any, errType: any, message?: string): void
-    doesNotThrows(fn: () => any, errType: any, message?: string): void
+    doesNotThrow(fn: () => any, errType: any, message?: string): void
     rejects(
       fn: () => any | Promise<any>,
       errType: any,
       message?: string
     ): Promise<any>
-    doesNotRejects(
+    doesNotReject(
       fn: () => any | Promise<any>,
       errType: any,
       message?: string
     ): Promise<any>
     /**
      * Assert that the given mock was called.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.called(console.log) // passes
+     * ```
      */
     called(mock: any): void
+
     /**
      * Assert that the given mock was not called.
+     *
+     * @example
+     * ```ts
+     * assert.notCalled(console.log) // passes
+     * ```
      */
     notCalled(mock: any): void
+
     /**
      * Assert that the given mock was called only once.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.calledOnce(console.log) // passes
+     * ```
      */
     calledOnce(mock: any): void
+
     /**
      * Assert that the given mock was called the
      * determined number of times.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * console.log('hello', 'world', '!')
+     * console.log('hello', 'world', '!')
+     * assert.calledTimes(console.log, 3) // passes
+     * ```
      */
     calledTimes(mock: any, times: number): void
+
     /**
      * Assert that the given mock was called with the
      * determined arguments.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.calledWith(console.log, 'hello', 'world', '!') // passes
+     * ```
      */
     calledWith(mock: any, ...args: any[]): void
+
     /**
      * Assert that the given mock was not called with the
      * determined arguments.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.notCalledWith(console.log, 'hello', 'world') // passes
+     * ```
      */
     notCalledWith(mock: any, ...args: any[]): void
+
     /**
      * Assert that the given mock was called with the
      * arguments matching some of the given arguments.
@@ -173,6 +216,7 @@ declare module '@japa/assert' {
      * ```
      */
     calledWithMatch(mock: any, ...args: any[]): void
+
     /**
      * Assert that the given mock was not called with the
      * arguments matching some of the given arguments.
@@ -186,35 +230,82 @@ declare module '@japa/assert' {
      * ```
      */
     notCalledWithMatch(mock: any, ...args: any[]): void
+
     /**
      * Assert that the given mock was called only once
      * with the determined arguments.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * assert.calledOnceWith(console.log, 'hello', 'world', '!') // passes
+     * ```
      */
     calledOnceWith(mock: any, ...args: any[]): void
+
     /**
      * Assert that the given mock was called the
      * determined number of times with always the determined
      * arguments.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * console.log('hello', 'world', '!')
+     * assert.calledTimesWith(console.log, 2, 'hello', 'world', '!') // passes
+     * ```
      */
     calledTimesWith(mock: any, times: number, ...args: any[]): void
+
     /**
      * Assert that the given mock was called before
      * an other determined mock.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * console.error('hello', 'world', '!')
+     * assert.calledBefore(console.log, console.error) // passes
+     * ```
      */
     calledBefore(mock: any, beforeMock: any): void
+
     /**
      * Assert that the given mock was not called before
      * an other determined mock.
+     *
+     * @example
+     * ```ts
+     * console.error('hello', 'world', '!')
+     * console.log('hello', 'world', '!')
+     * assert.notCalledBefore(console.log, console.error) // passes
+     * ```
      */
     notCalledBefore(mock: any, beforeMock: any): void
+
     /**
      * Assert that the given mock was called after
      * an other determined mock.
+     *
+     * @example
+     * ```ts
+     * console.error('hello', 'world', '!')
+     * console.log('hello', 'world', '!')
+     * assert.calledAfter(console.log, console.error) // passes
+     * ```
      */
     calledAfter(mock: any, afterMock: any): void
+
     /**
      * Assert that the given mock was not called after
      * an other determined mock.
+     *
+     * @example
+     * ```ts
+     * console.log('hello', 'world', '!')
+     * console.error('hello', 'world', '!')
+     * assert.notCalledAfter(console.log, console.error) // passes
+     * ```
      */
     notCalledAfter(mock: any, afterMock: any): void
   }

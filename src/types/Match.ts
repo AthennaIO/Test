@@ -7,6 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import type { SinonMatcher } from 'sinon'
+import type { SinonMatch } from 'sinon'
 
-export type Match = SinonMatcher
+export type Match = SinonMatch

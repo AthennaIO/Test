@@ -29,7 +29,7 @@ export class Mock {
    * and a method of the object.
    */
   public static when<T = any>(object: T, method: keyof T): MockBuilder {
-    return new MockBuilder(object, method, Mock.sandbox)
+    return new MockBuilder(Mock.sandbox, object, method)
   }
 
   /**
@@ -78,8 +78,8 @@ export class Mock {
    * assert.isTrue({ hello: 'world', name: 'João' }, Mock.match({ hello: 'world' }))
    * ```
    */
-  public static match(value: any): Match {
-    return Mock.sandbox.match(value)
+  public static get match(): Match {
+    return Mock.sandbox.match
   }
 
   /**
