@@ -18,7 +18,7 @@ export class AfterAllHookException extends Exception {
     const hook = Color.green.bold('@AfterAll')
     const classMethod = Color.yellow.bold(`${className}.${method}`)
     const message = `${Color.gray.bold.bgYellow(' MESSAGE ')}\n\n${
-      error.message
+      error.message ? error.message : JSON.stringify(error, null, 2)
     }`
 
     error.message = `An exception has occurred while running the ${hook} hook in ${classMethod} method.\n\n${message}`

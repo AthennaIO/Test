@@ -18,7 +18,7 @@ export class UserService {
     ]
   }
 
-  public async findById(id: number) {
+  public async findById(id?: number) {
     const users = await this.find()
 
     return users.find(user => user.id === id)

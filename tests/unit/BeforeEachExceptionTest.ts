@@ -15,7 +15,7 @@ export default class BeforeEachExceptionTest {
 
   @BeforeAll()
   public async beforeAll() {
-    this.processExit = Mock.when(process, 'exit').return(undefined)
+    this.processExit = Mock.when(process, 'exit').return(undefined).get()
   }
 
   @BeforeEach()
@@ -35,6 +35,7 @@ export default class BeforeEachExceptionTest {
 
   @Test()
   public async shouldLogAnExceptionWhenBeforeEachHookFails({ assert }: Context) {
+    console.log(this.processExit)
     assert.isTrue(this.processExit.calledTwice)
     assert.isTrue(this.processExit.calledWith(1))
   }

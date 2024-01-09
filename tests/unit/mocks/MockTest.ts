@@ -67,7 +67,7 @@ export default class MockTest {
   public async shouldBeAbleToMockObjectMethodsToReturnValue({ assert }: Context) {
     const userService = new UserService()
 
-    const mock = Mock.when(userService, 'findById').return({ id: 2 })
+    const mock = Mock.when(userService, 'findById').return({ id: 2 }).get()
 
     userService.findById(1)
 
@@ -78,7 +78,7 @@ export default class MockTest {
   public async shouldBeAbleToMockObjectMethodsToResolveAReturnValue({ assert }: Context) {
     const userService = new UserService()
 
-    const mock = Mock.when(userService, 'findById').resolve({ id: 2 })
+    const mock = Mock.when(userService, 'findById').resolve({ id: 2 }).get()
 
     await userService.findById(1)
 
@@ -129,8 +129,8 @@ export default class MockTest {
 
     Mock.restoreAll()
 
-    await assert.doesNotRejects(() => userService.find())
-    await assert.doesNotRejects(() => userService.findById(1))
+    await assert.doesNotReject(() => userService.find())
+    await assert.doesNotReject(() => userService.findById(1))
   }
 
   @Test()
@@ -146,20 +146,24 @@ export default class MockTest {
     Mock.restore(userService.find)
     Mock.restore(userService.findById)
 
-    await assert.doesNotRejects(() => userService.find())
-    await assert.doesNotRejects(() => userService.findById(1))
+    await assert.doesNotReject(() => userService.find())
+    await assert.doesNotReject(() => userService.findById(1))
   }
 
   @Test()
   public async shouldBeAbleToRestoreASingleMockedProperty({ assert }: Context) {
     const userService = new UserService()
 
-    const mockFind = Mock.when(userService, 'find').value(() => {
-      throw new Error('ERROR_MOCK')
-    })
-    const mockFindById = Mock.when(userService, 'findById').value(() => {
-      throw new Error('ERROR_MOCK')
-    })
+    const mockFind = Mock.when(userService, 'find')
+      .value(() => {
+        throw new Error('ERROR_MOCK')
+      })
+      .get()
+    const mockFindById = Mock.when(userService, 'findById')
+      .value(() => {
+        throw new Error('ERROR_MOCK')
+      })
+      .get()
 
     await assert.rejects(() => userService.find(), Error)
     await assert.rejects(() => userService.findById(1), Error)
@@ -167,7 +171,223 @@ export default class MockTest {
     Mock.restore(mockFind)
     Mock.restore(mockFindById)
 
-    await assert.doesNotRejects(() => userService.find())
-    await assert.doesNotRejects(() => userService.findById(1))
+    await assert.doesNotReject(() => userService.find())
+    await assert.doesNotReject(() => userService.findById(1))
+  }
+
+  @Test()
+  public async shouldBeAbleToMockAMethodOnlyWhenCalledWithDeterminedArgs({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withArgs(2).resolve({ id: 2 }).withArgs(3).resolve({ id: 3 })
+
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(2), { id: 2 })
+    assert.deepEqual(await userService.findById(3), { id: 3 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockAMethodOnlyWhenCalledWithDeterminedArgsChangingItBehavior({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withArgs(2).resolve({ id: 2 }).withArgs(3).return({ id: 3 })
+
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(2), { id: 2 })
+    assert.deepEqual(userService.findById(3), { id: 3 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockAMethodOnlyOnSecondAndThirdCall({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').onSecondCall().resolve({ id: 2 }).onThirdCall().return({ id: 3 })
+
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(2), { id: 2 })
+    assert.deepEqual(userService.findById(3), { id: 3 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockAMethodOnlyOnFourthCall({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').onCall(4).resolve({ id: 4 })
+
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+    assert.deepEqual(await userService.findById(1), { id: 4 })
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsAString({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withStringArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById('1'), { id: 2 })
+    assert.deepEqual(await userService.findById(1), { id: 1, name: 'João Lenon', email: 'lenon@athenna.io' })
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsANumber({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withNumberArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(1), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsAnObject({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withObjectArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById({}), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsAnArray({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withArrayArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById([]), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsADate({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withDateArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(new Date()), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsARegexp({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withRegexpArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(new RegExp()), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsABoolean({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withBooleanArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(false), { id: 2 })
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(true), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenArgIsAFunction({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withFunctionArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(() => {}), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenExistsAnyArg({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withAnyArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(null), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenValueIsTruthy({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withTruthyArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(true), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMockOnlyWhenValueIsFalsy({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').withFalsyArg().resolve({ id: 2 })
+
+    // eslint-disable-next-line
+    // @ts-ignore
+    assert.deepEqual(await userService.findById(false), { id: 2 })
+    assert.deepEqual(await userService.findById(), undefined)
+  }
+
+  @Test()
+  public async shouldBeAbleToMergeWithArgsAndOnCall({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById')
+      .withArgs(1)
+      .onFirstCall()
+      .resolve({ id: 2 })
+      .onSecondCall()
+      .resolve({ id: 3 })
+      .withArgs(3)
+      .resolve({ id: 4 })
+
+    assert.deepEqual(await userService.findById(1), { id: 2 })
+    assert.deepEqual(await userService.findById(1), { id: 3 })
+    assert.deepEqual(await userService.findById(1), {
+      id: 1,
+      name: 'João Lenon',
+      email: 'lenon@athenna.io'
+    })
+    assert.deepEqual(await userService.findById(2), undefined)
+    assert.deepEqual(await userService.findById(3), { id: 4 })
+  }
+
+  @Test()
+  public async shouldBeAbleToReturnTheThisPropertyInAMock({ assert }: Context) {
+    const userService = new UserService()
+
+    Mock.when(userService, 'findById').returnThis()
+
+    assert.deepEqual(await userService.findById(1), userService)
   }
 }
