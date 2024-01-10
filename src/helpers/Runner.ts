@@ -148,14 +148,14 @@ export class Runner {
   }
 
   /**
-   * Set the `NODE_ENV` and `APP_ENV` environments.
+   * Set the `APP_ENV` and `NODE_ENV` environments.
    *
    * @example ```ts
-   * Runner.setNodeEnv()
-   * Runner.setNodeEnv('test')
+   * Runner.setAppEnv()
+   * Runner.setAppEnv('test')
    * ```
    */
-  public static setNodeEnv(env = 'test'): typeof Runner {
+  public static setAppEnv(env = 'test'): typeof Runner {
     process.env.APP_ENV = env
     process.env.NODE_ENV = env
 
