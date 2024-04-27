@@ -22,7 +22,9 @@ export function AfterEach(): MethodDecorator {
 
     const afterEachHooks = Reflect.getMetadata('hooks:afterEach', Target)
 
-    afterEachHooks.push({ method: property })
+    if (!afterEachHooks.includes(property)) {
+      afterEachHooks.push(property)
+    }
 
     Reflect.defineMetadata('hooks:afterEach', afterEachHooks, Target)
   }

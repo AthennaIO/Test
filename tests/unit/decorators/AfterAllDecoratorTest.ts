@@ -19,7 +19,7 @@ test.group('AfterAllAnnotationTest', () => {
 
     const afterAllHooks = Reflect.getMetadata('hooks:afterAll', MyClass)
 
-    assert.deepEqual(afterAllHooks, [{ method: 'afterAll' }])
+    assert.deepEqual(afterAllHooks, ['afterAll'])
   })
 
   test('should register tests and hooks metadata default array value if not defined', async ({ assert }) => {

@@ -101,7 +101,7 @@ export class TestConverter {
   public beforeAll(group: Group) {
     const hooks = Reflect.getMetadata('hooks:beforeAll', this.TestClass) || []
 
-    hooks.forEach(({ method }) => {
+    hooks.forEach(method => {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
@@ -126,7 +126,7 @@ export class TestConverter {
   public beforeEach(group: Group) {
     const hooks = Reflect.getMetadata('hooks:beforeEach', this.TestClass) || []
 
-    hooks.forEach(({ method }) => {
+    hooks.forEach(method => {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
@@ -151,7 +151,7 @@ export class TestConverter {
   public afterAll(group: Group) {
     const hooks = Reflect.getMetadata('hooks:afterAll', this.TestClass) || []
 
-    hooks.forEach(({ method }) => {
+    hooks.forEach(method => {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {
@@ -176,7 +176,7 @@ export class TestConverter {
   public afterEach(group: Group) {
     const hooks = Reflect.getMetadata('hooks:afterEach', this.TestClass) || []
 
-    hooks.forEach(({ method }) => {
+    hooks.forEach(method => {
       const closure = Options.bind(this.testClass, method)
 
       if (!closure) {

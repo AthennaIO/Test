@@ -22,16 +22,6 @@ export class MockBuilder {
    */
   private sandbox: SinonSandbox
 
-  /**
-   * Holds the instance of the stubbed object.
-   */
-  private object: any
-
-  /**
-   * Holds the method of the stubbed object
-   */
-  private method: any
-
   public constructor(
     sandbox: SinonSandbox,
     object: any,
@@ -45,8 +35,6 @@ export class MockBuilder {
     }
 
     this.sandbox = sandbox
-    this.object = object
-    this.method = method
 
     this.stub = this.sandbox.stub(object, method).callsFake((...args) => {
       return this.stub.wrappedMethod.bind(object)(...args)
