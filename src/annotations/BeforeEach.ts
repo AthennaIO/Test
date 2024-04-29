@@ -22,7 +22,9 @@ export function BeforeEach(): MethodDecorator {
 
     const beforeEachHooks = Reflect.getMetadata('hooks:beforeEach', Target)
 
-    beforeEachHooks.push({ method: property })
+    if (!beforeEachHooks.includes(property)) {
+      beforeEachHooks.push(property)
+    }
 
     Reflect.defineMetadata('hooks:beforeEach', beforeEachHooks, Target)
   }

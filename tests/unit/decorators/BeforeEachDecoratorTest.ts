@@ -19,7 +19,7 @@ test.group('BeforeEachAnnotationTest', () => {
 
     const beforeEachHooks = Reflect.getMetadata('hooks:beforeEach', MyClass)
 
-    assert.deepEqual(beforeEachHooks, [{ method: 'beforeEach' }])
+    assert.deepEqual(beforeEachHooks, ['beforeEach'])
   })
 
   test('should register tests and hooks metadata default array value if not defined', async ({ assert }) => {
