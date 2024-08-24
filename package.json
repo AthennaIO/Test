@@ -1,6 +1,6 @@
 {
   "name": "@athenna/test",
-  "version": "4.28.0",
+  "version": "4.29.0",
   "description": "The Athenna test runner. Built on top of Japa.",
   "license": "MIT",
   "author": "João Lenon <lenon@athenna.io>",
@@ -63,10 +63,10 @@
     "sinon": "^15.2.0"
   },
   "devDependencies": {
-    "@athenna/common": "^4.43.0",
-    "@athenna/tsconfig": "^4.16.0",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
+    "@athenna/common": "^4.44.0",
+    "@athenna/tsconfig": "^4.18.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
