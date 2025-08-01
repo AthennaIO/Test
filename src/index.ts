@@ -9,9 +9,19 @@
 
 import { assert, Assert } from '@japa/assert'
 import { spec } from '@japa/runner/reporters'
+import { expectTypeOf } from '@japa/expect-type'
 import { run, test, configure, processCLIArgs } from '@japa/runner'
 
-export { Assert, run, spec, test, assert, configure, processCLIArgs }
+export {
+  Assert,
+  run,
+  spec,
+  test,
+  assert,
+  expectTypeOf,
+  configure,
+  processCLIArgs
+}
 
 export * from '#src/types'
 

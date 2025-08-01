@@ -471,7 +471,7 @@ export class MockBuilder {
    * mock.called // false
    * ```
    */
-  public value(value: any) {
+  public value(value?: any) {
     this.stub = this.stub.value(value)
 
     return this
@@ -489,7 +489,7 @@ export class MockBuilder {
    * mock.called // false
    * ```
    */
-  public return(value: any) {
+  public return(value?: any) {
     this.stub = this.stub.returns(value)
 
     return this
@@ -507,7 +507,7 @@ export class MockBuilder {
    * mock.called // false
    * ```
    */
-  public throw(value: string | Error | Exception): MockBuilder {
+  public throw(value?: string | Error | Exception): MockBuilder {
     this.stub = this.stub.throws(value)
 
     return this
@@ -525,7 +525,7 @@ export class MockBuilder {
    * mock.called // false
    * ```
    */
-  public resolve(value: any) {
+  public resolve(value?: any) {
     this.stub = this.stub.resolves(value)
 
     return this
@@ -543,7 +543,7 @@ export class MockBuilder {
    * mock.called // false
    * ```
    */
-  public reject<T = any>(value: T): MockBuilder {
+  public reject<T = any>(value?: T): MockBuilder {
     this.stub = this.stub.rejects(value)
 
     return this
