@@ -8,7 +8,14 @@
  */
 
 import type { Config, PluginFn } from '#src'
-import { Importer, run, assert, configure, processCLIArgs } from '#src'
+import {
+  Importer,
+  run,
+  assert,
+  configure,
+  processCLIArgs,
+  expectTypeOf
+} from '#src'
 
 export class Runner {
   public static files: string[] = []
@@ -78,6 +85,17 @@ export class Runner {
    */
   public static addAssertPlugin(): typeof Runner {
     return this.addPlugin(assert())
+  }
+
+  /**
+   * Add the `expectTypeOf()` plugin.
+   *
+   * @example ```ts
+   * Runner.addExpectTypeOfPlugin()
+   * ```
+   */
+  public static addExpectTypeOfPlugin(): typeof Runner {
+    return this.addPlugin(expectTypeOf())
   }
 
   /**
