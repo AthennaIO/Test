@@ -17,6 +17,7 @@ import type {
 } from '#src'
 import { createSandbox } from 'sinon'
 import { MockBuilder } from '#src/mocks/MockBuilder'
+import type { FakeTimerInstallOpts } from '#src/types/FakeTimerInstallOpts'
 
 export class Mock {
   /**
@@ -30,6 +31,13 @@ export class Mock {
    */
   public static when<T = any>(object: T, method: keyof T): MockBuilder {
     return new MockBuilder(Mock.sandbox, object, method)
+  }
+
+  /**
+   * Create a fake timer to mock dates in your application.
+   */
+  public static useFakeTimers(config?: number | Date | FakeTimerInstallOpts) {
+    return Mock.sandbox.useFakeTimers(config)
   }
 
   /**

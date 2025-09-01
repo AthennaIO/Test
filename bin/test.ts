@@ -11,6 +11,7 @@ import { Runner } from '#src'
 
 await Runner.setTsEnv()
   .addAssertPlugin()
+  .addExpectTypeOfPlugin()
   .addPath('tests/unit/**/*Test.ts')
   .setCliArgs(process.argv.slice(2))
   .setGlobalTimeout(10000)
