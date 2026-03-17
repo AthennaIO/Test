@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import nock from 'nock'
+
 import type {
   Spy,
   Match,
@@ -15,6 +17,7 @@ import type {
   SpyInstance,
   StubInstance
 } from '#src'
+
 import { createSandbox } from 'sinon'
 import { MockBuilder } from '#src/mocks/MockBuilder'
 import type { FakeTimerInstallOpts } from '#src/types/FakeTimerInstallOpts'
@@ -38,6 +41,20 @@ export class Mock {
    */
   public static useFakeTimers(config?: number | Date | FakeTimerInstallOpts) {
     return Mock.sandbox.useFakeTimers(config)
+  }
+
+  /**
+   * Intercept and mock HTTP request calls.
+   *
+   * @example
+   * ```ts
+   * Mock.whenRequest('https://api.example.com')
+   *   .get('/users')
+   *   .reply(200, { users: [{ id: 1, name: 'John Doe' }] })
+   * ```
+   */
+  public static whenHttpRequest(url: string) {
+    return nock(url)
   }
 
   /**
@@ -119,5 +136,6 @@ export class Mock {
     Mock.sandbox.resetHistory()
     Mock.sandbox.resetBehavior()
     Mock.sandbox.reset()
+    nock.cleanAll()
   }
 }
