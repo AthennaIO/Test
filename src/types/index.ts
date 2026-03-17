@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-export type { Config, PluginFn } from '@japa/runner'
+export type { Config, PluginFn } from '@japa/runner/types'
 
 export * from '#src/types/Spy'
 export * from '#src/types/Match'
