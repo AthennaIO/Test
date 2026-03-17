@@ -7,6 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import type { TestHooksHandler } from '@japa/core'
+import type { TestHooksHandler } from '@japa/runner/types'
 
 export type TeardownHandler<T> = TestHooksHandler<T>
