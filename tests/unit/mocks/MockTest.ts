@@ -53,6 +53,18 @@ export default class MockTest {
   }
 
   @Test()
+  public async shouldBeAbleToMockHttpRequest({ assert }: Context) {
+    Mock.whenHttpRequest('https://api.example.com')
+      .get('/users')
+      .reply(200, { users: [{ id: 1, name: 'John Doe' }] })
+
+    const response = await fetch('https://api.example.com/users')
+    const data = await response.json()
+
+    assert.deepEqual(data, { users: [{ id: 1, name: 'John Doe' }] })
+  }
+
+  @Test()
   public async shouldBeAbleToMockObjectPropertyWithDifferentValues({ assert }: Context) {
     const userService = new UserService()
 
