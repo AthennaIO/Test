@@ -8,7 +8,10 @@
  */
 
 import type { Context } from '#src'
-import type { TestHooksHandler, TestHooksCleanupHandler } from '@japa/runner/types'
+import type {
+  TestHooksHandler,
+  TestHooksCleanupHandler
+} from '@japa/runner/types'
 
 export interface TestOptions {
   title?: string
