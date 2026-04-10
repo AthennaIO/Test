@@ -11,6 +11,7 @@ import { debug } from '#src/debug'
 import { test as japaTest } from '#src'
 import type { TestOptions } from '#src'
 import type { Group } from '@japa/runner/core'
+import { resolveTagsForTest } from '#src/annotations/Tags'
 import { Is, ObjectBuilder, Options } from '@athenna/common'
 import { AfterAllHookException } from '#src/exceptions/AfterAllHookException'
 import { BeforeAllHookException } from '#src/exceptions/BeforeAllHookException'
@@ -74,7 +75,9 @@ export class TestConverter {
       Options.whenDefined(options.waitForDone, () => test.waitForDone())
       Options.whenDefined(options.disableTimeout, () => test.disableTimeout())
 
-      Options.whenDefined(options.tags, tags => test.tags(tags))
+      Options.whenDefined(resolveTagsForTest(this.TestClass, options), tags =>
+        test.tags(tags)
+      )
       Options.whenDefined(options.with, cases => test.with(cases))
       Options.whenDefined(options.retry, times => test.retry(times))
       Options.whenDefined(options.setup, setup => test.setup(setup))

@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { test, Test, Tags } from '#src'
 import { ObjectBuilder } from '@athenna/common'
+import { test, Test, Tags, resolveTagsForTest } from '#src'
 
 test.group('TagsAnnotationTest', () => {
   test('should be able to register tests of some class using test and tags annotation', async ({ assert }) => {
@@ -51,5 +51,60 @@ test.group('TagsAnnotationTest', () => {
     assert.deepEqual(Reflect.getMetadata('hooks:beforeAll', MyClass), [])
     assert.deepEqual(Reflect.getMetadata('hooks:afterEach', MyClass), [])
     assert.deepEqual(Reflect.getMetadata('hooks:beforeEach', MyClass), [])
+  })
+
+  test('should register class-level tags metadata', async ({ assert }) => {
+    @Tags(['unit'])
+    class BaseUnitTest {}
+
+    assert.deepEqual(Reflect.getMetadata('classTags', BaseUnitTest), ['unit'])
+  })
+
+  test('should inherit class-level tags for methods without method-level tags', async ({ assert }) => {
+    @Tags(['unit'])
+    class BaseUnitTest {}
+
+    class MyTest extends BaseUnitTest {
+      @Test()
+      public async testOne() {}
+    }
+
+    const tests: ObjectBuilder = Reflect.getMetadata('tests', MyTest)
+
+    assert.deepEqual(resolveTagsForTest(MyTest, tests.get('testOne')), ['unit'])
+  })
+
+  test('should use only method-level tags when the method declares @Tags()', async ({ assert }) => {
+    @Tags(['unit'])
+    class BaseUnitTest {}
+
+    class MyTest extends BaseUnitTest {
+      @Test()
+      public async testOne() {}
+
+      @Test()
+      @Tags(['two'])
+      public async testTwo() {}
+    }
+
+    const tests: ObjectBuilder = Reflect.getMetadata('tests', MyTest)
+
+    assert.deepEqual(resolveTagsForTest(MyTest, tests.get('testOne')), ['unit'])
+    assert.deepEqual(resolveTagsForTest(MyTest, tests.get('testTwo')), ['two'])
+  })
+
+  test('should merge class tags from base to subclass in order', async ({ assert }) => {
+    @Tags(['unit'])
+    class Base {}
+
+    @Tags(['integration'])
+    class Child extends Base {
+      @Test()
+      public async example() {}
+    }
+
+    const tests: ObjectBuilder = Reflect.getMetadata('tests', Child)
+
+    assert.deepEqual(resolveTagsForTest(Child, tests.get('example')), ['unit', 'integration'])
   })
 })
